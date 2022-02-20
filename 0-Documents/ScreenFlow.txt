@@ -1,0 +1,4 @@
+Admin:
+	Thêm/sửa/xóa dịch vụ: dịch vụ -> thêm/sửa/xóa
+	Thêm/sửa/xóa phòng: Quản lý phòng -> 
+	

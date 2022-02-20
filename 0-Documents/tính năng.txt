@@ -1,0 +1,19 @@
+Admin:
+	- authentication
+	- thêm/sửa/xóa dịch vụ.
+	- thêm/sửa/xóa phòng.
+	- thêm/sửa/xóa người thuê
+	- Xem danh sách phòng.
+	- Xem danh sách người thuê
+	- Xem chi tiết phòng.
+	- Xem chi tiết người thuê
+	- thêm/sửa/xóa hợp đồng.
+	- Xem chi tiết hợp đồng.
+	- analystic (tổng tiền thu, tổng tiền chi, lợi nhuận)
+Customer:
+	- authentication
+	- Xem danh sách phòng (Trống - không)
+	- Xem hợp đồng
+	- Thông tin phòng đang thuê
+	- yêu cầu trả phòng
+	- Yêu cầu hỗ trợ
