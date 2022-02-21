@@ -1,4 +1,4 @@
-drop database motelDB
+--drop database motelDB
 create database motelDB
 go
 use motelDB
@@ -84,6 +84,7 @@ create table ServicesOfContract
 	ID int primary key identity(1,1),
 	ServicesID int foreign key references Services(ID),
 	ContractID int foreign key references Contract(ID),
+	--note nvarchar(100)
 )
 --drop table Transaction
 go
@@ -113,3 +114,7 @@ create table Customer
 	CreatedAt date not null,
 	UpdatedAt date not null,
 )
+
+--insert database
+insert into Account(Username,Password,CreatedAt,UpdatedAt) values('Admin','Admin','2022-02-21','2022-02-21')
+select * from Account
