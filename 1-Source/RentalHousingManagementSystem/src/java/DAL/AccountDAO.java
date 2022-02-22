@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Profile;
 
 /**
  *
@@ -30,6 +31,24 @@ public class AccountDAO extends BaseDAO {
                 Account a = new  Account(rs.getInt("ID"), rs.getString("username"), 
                         rs.getString("password"), rs.getDate("createdAt"), rs.getDate("updatedAt"));
                 return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    // get profile by accountID
+     public Profile getProfileByAccountID(int AccountID) {
+        try {
+            String sql = "Select * from Profile where AccountID=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, AccountID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Profile profile = new  Profile(rs.getInt("ID"), rs.getInt("AccountID"), rs.getInt("Role"),
+                        rs.getString("Name"), rs.getString("PhoneNumber"), rs.getDate("DOB"), rs.getString("Address"),
+                        rs.getString("Job"), rs.getString("Email"),rs.getDate("createdAt"),rs.getDate("updatedAt"));
+                return profile;
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
