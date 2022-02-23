@@ -7,16 +7,13 @@ and open the template in the editor.
     Created on : Feb 22, 2022, 4:22:04 PM
     Author     : coder
 */
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 html, body {
     overflow-x: hidden;
     height: 100%;
 }
 body {
-    background: #fff;
     padding: 0;
     margin: 0;
-    font-family: 'Varela Round', sans-serif;
 }
 .header {
     display: block;
@@ -25,36 +22,18 @@ body {
     max-width: 100%;
     box-shadow: none;
     background-color: #FC466B;
-    position: fixed;
-    height: 60px!important;
+    /*position: fixed;*/
+    height: 6%;
     overflow: hidden;
     z-index: 10;
 }
-.main {
-    margin: 0 auto;
-    display: block;
-    height: 100%;
-    margin-top: 60px;
-}
-.mainInner{
-    display: table;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-}
-.mainInner div{
-    display:table-cell;
-    vertical-align: middle;
-    font-size: 3em;
-    font-weight: bold;
-    letter-spacing: 1.25px;
-}
 #sidebarMenu {
+    font-family: 'Varela Round', sans-serif;
     height: 100%;
     position: fixed;
     left: 0;
-    width: 250px;
-    margin-top: 60px;
+    width: 12%;
+    /*margin-top: 3%;*/
     transform: translateX(-250px);
     transition: transform 250ms ease-in-out;
     background: linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%);

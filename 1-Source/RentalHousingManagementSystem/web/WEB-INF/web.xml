@@ -20,6 +20,18 @@
         <servlet-name>HomeCustomer</servlet-name>
         <servlet-class>controller.HomeCustomerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RoomManage</servlet-name>
+        <servlet-class>controller.RoomManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRoomManage</servlet-name>
+        <servlet-class>controller.AddRoomManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>HomeCustomer</servlet-name>
         <url-pattern>/HomeCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomManage</servlet-name>
+        <url-pattern>/RoomManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRoomManage</servlet-name>
+        <url-pattern>/AddRoomManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
