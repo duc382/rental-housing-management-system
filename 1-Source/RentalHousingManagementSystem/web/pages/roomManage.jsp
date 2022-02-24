@@ -4,6 +4,8 @@
     Author     : coder
 --%>
 
+<%@page import="model.Room"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,55 +18,78 @@
         <link rel="stylesheet" href="css/StyleRoomManage.css">
         <link rel="stylesheet" href="css/StyleSidebar.css">
         <script src="js/JSRoomManage.js"></script>
+        <script>
+            const deleteFunction = (id) =>{
+                if (confirm("Bấm ok để xóa phòng đã chọn, cancel để hủy") == true) {
+                    window.location.href = "DeleteRoomManage?id=" + id;
+                }
+            }
+        </script>
     </head>
     <body>
+        <%
+            ArrayList<Room> listRoom = (ArrayList<Room>) request.getAttribute("listRoom");
+        %>
+        <script>
+            const listRoomName = [];
+            <%
+                for (int i = 0; i < listRoom.size(); i++) {
+            %>
+            listRoomName.push("<%=listRoom.get(i).getName()%>");
+            <%
+                }
+            %>
+        </script>
         <%@include file="sidebarAndHeader.jsp"%>
         <div class="form-popup" id="myForm">
-            <form action="AddRoomManage" method="post" class="form-container">
+            <form class="form-container" name="myForm" action="AddRoomManage" onsubmit="return validateForm(listRoomName)" method="post"  >
                 <h1 style="text-align: center;">Thêm Phòng</h1>
                 <label><b>Tên phòng</b></label>
-                <input type="text" placeholder="VD: P01/Phòng 01" id="name" name="name" required>
+                <input type="text" placeholder="VD: P01/Phòng 01" name="name" required>
                 <label><b>Giá(VNĐ)</b></label>
                 <input type="number" placeholder="VD: 18000000" name="price" required>
                 <label><b>Diện tích (m2)</b></label>
-                <input type="number" placeholder="VD: 18" name="area" required>
+                <input type="text" placeholder="VD: 18" name="area" required>
                 <label><b>Số lượng người tối đa</b></label>
                 <input type="number" placeholder="VD: 2" name="quantityMax" required>
                 <label><b>Đồ dùng có trong phòng</b></label>
                 <input type="text" placeholder="VD: giường, tủ...." name="utensil">
-                <input onclick="check()" type="submit" class="btn" value="Thêm"/>
+                <input type="submit" class="btn" value="Thêm"/>
                 <button type="button" class="btn cancel" onclick="closeForm()">Hủy</button>
             </form>
         </div>
-        <div style="margin-left: 12%; margin-top: 6%">
+        <div>
             <div class="container mt-3" sty>
-                <button class="open-button" onclick="openForm()">Thêm Phòng</button>
-                <h2>Hover Rows</h2>
-                <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
-                <table class="table table-hover">
+                <button class="open-button" onclick="openForm()">Thêm Phòng</button>    
+                <table id="dtBasicExample" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Email</th>
+                            <th class="th-sm">Tên Phòng</th>
+                            <th class="th-sm">Giá</th>
+                            <th class="th-sm">Diện Tích</th>
+                            <th class="th-sm">Số Lượng Tối Đa</th>
+                            <th>Đồ Dùng Trong Phòng</th>
+                            <th>Sửa/Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                        </tr>
+                            <%
+                                        for (int i = 0; i < listRoom.size(); i++) {%>
                         <tr>
-                            <td>Mary</td>
-                            <td>Moe</td>
-                            <td>mary@example.com</td>
+                            <td><%=listRoom.get(i).getName()%></td>
+                            <td><%=listRoom.get(i).getPrice()%></td>
+                            <td><%=listRoom.get(i).getArea()%></td>
+                            <td><%=listRoom.get(i).getQuantityMax()%></td>
+                            <td><%=listRoom.get(i).getUtensil()%></td>
+                            <td>
+                                <a href="Edit?id=<%=listRoom.get(i).getID()%>">Edit</a>
+                                <a onclick="deleteFunction(<%=listRoom.get(i).getID()%>)" href="#">Delete</a>
+                            </td>
                         </tr>
-                        <tr>
-                            <td>July</td>
-                            <td>Dooley</td>
-                            <td>july@example.com</td>
+                        <%}%>   
                         </tr>
+
                     </tbody>
                 </table>
             </div>
