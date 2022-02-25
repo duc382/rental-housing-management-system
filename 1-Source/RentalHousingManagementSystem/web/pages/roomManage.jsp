@@ -15,13 +15,11 @@
         <!--bs-->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!-- Thư viện jquery đã nén phục vụ cho bootstrap.min.js  -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- Thư viện popper đã nén phục vụ cho bootstrap.min.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-        <!-- Bản js đã nén của bootstrap 4, đặt dưới cùng trước thẻ đóng body-->
-        <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.csss">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
         <!--hết bs-->
         <link rel="stylesheet" href="css/StyleRoomManage.css">
         <link rel="stylesheet" href="css/StyleSidebar.css">
@@ -105,9 +103,8 @@
                     <script>
                         roomEdit = new Array();
                     </script>
-                    <tr>
-                        <%
-                            for (int i = 0; i < listRoom.size(); i++) {%>
+                    <%
+                        for (int i = 0; i < listRoom.size(); i++) {%>
                     <tr>
                         <td><%=listRoom.get(i).getName()%></td>
                         <td style="text-align: center"><%=listRoom.get(i).getPrice()%></td>
@@ -134,5 +131,11 @@
                 </table>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('#dtBasicExample').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
+        </script>
     </body>
 </html>
