@@ -1,3 +1,9 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
@@ -7,19 +13,20 @@ function closeForm() {
 }
 
 function validateForm(list) {
-    console.log('listOfRoom', list);
     var name = document.forms["myForm"]["name"].value;
-    if (list.toLocaleString().includes(name).toLocaleString()) {
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].toUpperCase() === name.toUpperCase()) {
+            alert("Tên phòng đã tồn tại!");
+            return false;
+        }
+    }
+    if (list.includes(name)) {
         alert("Tên phòng đã tồn tại!");
         return false;
     }
     var price = document.forms["myForm"]["price"].value;
     var area = document.forms["myForm"]["area"].value;
     var quantityMax = document.forms["myForm"]["quantityMax"].value;
-    if (price <= 0) {
-        alert("giá phải là số nguyên và lớn hơn 0");
-        return(false);
-    }
     if (quantityMax <= 0) {
         alert("Số lượng người tối đa phải là số nguyên và lớn hơn 0");
         return(false);
@@ -28,12 +35,11 @@ function validateForm(list) {
     try {
         areaF = parseFloat(area);
         if (areaF == area) {
-
-        } else {
-            throw "error format";
             if (areaF <= 0) {
                 throw "error < 0"
             }
+        } else {
+            throw "error format";
         }
     } catch (ex) {
         alert("Diện tích phải là số thực lớn hơn 0");
@@ -65,10 +71,10 @@ function closeFormEdit() {
 function validateFormEdit(list) {
     console.log('listOfRoom', list);
     var name = document.forms["myFormEdit"]["name"].value;
-    for (var i = 0; i < list.length; i++){
-        if (list[i] == name){
-            if (positionEdit == i){
-                
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].toUpperCase() === name.toUpperCase()) {
+            if (positionEdit == i) {
+
             } else {
                 alert("Tên phòng đã tồn tại!");
                 return false;
@@ -90,12 +96,11 @@ function validateFormEdit(list) {
     try {
         areaF = parseFloat(area);
         if (areaF == area) {
-
-        } else {
-            throw "error format";
             if (areaF <= 0) {
                 throw "error < 0"
             }
+        } else {
+            throw "error format";
         }
     } catch (ex) {
         alert("Diện tích phải là số thực lớn hơn 0");

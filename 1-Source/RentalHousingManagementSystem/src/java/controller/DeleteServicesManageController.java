@@ -5,27 +5,20 @@
  */
 package controller;
 
-import DAL.RoomDAO;
+import DAL.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Room;
+import model.Services;
 
 /**
  *
  * @author coder
  */
-public class AddRoomManageController extends HttpServlet {
+public class DeleteServicesManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +37,10 @@ public class AddRoomManageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddRoomManageController</title>");
+            out.println("<title>Servlet DeleteServicesManageController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddRoomManageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteServicesManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,8 +58,11 @@ public class AddRoomManageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-
+//        processRequest(request, response);
+        ServicesDAO DBS = new ServicesDAO();
+        int ID = Integer.parseInt(request.getParameter("id"));
+        DBS.deleteServices(ID);
+        response.sendRedirect("ServicesManage");
     }
 
     /**
@@ -80,38 +76,8 @@ public class AddRoomManageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        String name = "";
-        int price = -1;
-        double area = -1;
-        int quantityMax = -1;
-        String utensil = "";
-        if (request.getParameter("name") != null) {
-            name = request.getParameter("name");
-        }
-        if (request.getParameter("price") != null) {
-            price = Integer.parseInt(request.getParameter("price"));
-        }
-        if (request.getParameter("area") != null) {
-            area = Double.parseDouble(request.getParameter("area"));
-        }
-        if (request.getParameter("quantityMax") != null) {
-            quantityMax = Integer.parseInt(request.getParameter("quantityMax"));
-        }
-        if (request.getParameter("utensil") != null) {
-            utensil = request.getParameter("utensil");
-        }
-        LocalDate createdAt = LocalDate.now();
-        LocalDate updatedAt = LocalDate.now();
-        ZoneId defauZoneId = ZoneId.systemDefault();
-        Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
-        Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
-        Room room = new Room(name, price, area, quantityMax, utensil, createdAtD, updatedAtD);
-        RoomDAO DBR = new RoomDAO();
-        DBR.insertRoom(room);
-        response.sendRedirect("RoomManage");
+//        processRequest(request, response);
+
     }
 
     /**

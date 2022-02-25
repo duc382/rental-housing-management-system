@@ -23,7 +23,7 @@
             <ul class="sidebarMenuInner">
                 <li><a href="HomeManage">Trang Chủ</a></li>
                 <li><a href="RoomManage">Quản Lý Phòng</a></li>
-                <li><a href="ServiceManage">Quản Lý Dịch Vụ</a></li>
+                <li><a href="ServicesManage">Quản Lý Dịch Vụ</a></li>
                 <li><a href="RenterManage">Quản Lý Người Thuê</a></li>
                 <li><a href="AnalysticManage">Thống Kê Thu Chi</a></li>
                 <li><a href="Logout">Đăng Xuất</a></li>
