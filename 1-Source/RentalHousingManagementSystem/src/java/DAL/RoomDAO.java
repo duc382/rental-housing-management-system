@@ -26,7 +26,7 @@ public class RoomDAO extends BaseDAO {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getDouble("price"),
+                Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
                 rs.getDouble("area"), rs.getInt("quantityMax"), rs.getString("Utensil"),
                 rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
                 listRoom.add(room);
@@ -43,13 +43,32 @@ public class RoomDAO extends BaseDAO {
             String sql = "Insert into room(Name,Price,Area,QuantityMax,Utensil,CreatedAt,UpdatedAt) values(?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, room.getName());
-            st.setDouble(2, room.getPrice());
+            st.setInt(2, room.getPrice());
             st.setDouble(3, room.getArea());
             st.setInt(4, room.getQuantityMax());
             st.setString(5, room.getUtensil());
             st.setDate(6, new java.sql.Date(room.getCreatedAt().getTime()));
             st.setDate(7, new java.sql.Date(room.getUpdatedAt().getTime()));
             ResultSet rs = st.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    // update room
+    public boolean  updateRoom(Room room){
+        try {
+            String sql = "update room set Name=?,Price=?,Area=?,QuantityMax=?,Utensil=?,UpdatedAt=? where ID=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, room.getName());
+            st.setInt(2, room.getPrice());
+            st.setDouble(3, room.getArea());
+            st.setInt(4, room.getQuantityMax());
+            st.setString(5, room.getUtensil());
+            st.setDate(6, new java.sql.Date(room.getUpdatedAt().getTime()));
+            st.setInt(7, room.getID());
+            st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;

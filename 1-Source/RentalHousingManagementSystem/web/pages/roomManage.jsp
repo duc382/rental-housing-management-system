@@ -11,15 +11,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <title>Example</title>
+        <!--bs-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- Thư viện jquery đã nén phục vụ cho bootstrap.min.js  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Thư viện popper đã nén phục vụ cho bootstrap.min.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <!-- Bản js đã nén của bootstrap 4, đặt dưới cùng trước thẻ đóng body-->
+        <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.csss">
+        <!--hết bs-->
         <link rel="stylesheet" href="css/StyleRoomManage.css">
         <link rel="stylesheet" href="css/StyleSidebar.css">
         <script src="js/JSRoomManage.js"></script>
         <script>
-            const deleteFunction = (id) =>{
+            const deleteFunction = (id) => {
                 if (confirm("Bấm ok để xóa phòng đã chọn, cancel để hủy") == true) {
                     window.location.href = "DeleteRoomManage?id=" + id;
                 }
@@ -41,6 +49,7 @@
             %>
         </script>
         <%@include file="sidebarAndHeader.jsp"%>
+        <!--form thêm phòng-->
         <div class="form-popup" id="myForm">
             <form class="form-container" name="myForm" action="AddRoomManage" onsubmit="return validateForm(listRoomName)" method="post"  >
                 <h1 style="text-align: center;">Thêm Phòng</h1>
@@ -58,38 +67,69 @@
                 <button type="button" class="btn cancel" onclick="closeForm()">Hủy</button>
             </form>
         </div>
+        <!--form sửa phòng-->
+        <div class="form-popup" id="myFormEdit">
+            <form class="form-container" name="myFormEdit" action="EditRoomManage" onsubmit="return validateFormEdit(listRoomName)" method="post"  >
+                <h1 style="text-align: center;">Sửa phòng</h1>
+                <input style="display: none" id ="IDEdit" type="text" name="ID"> 
+                <label><b>Tên phòng</b></label>
+                <input id ="NameEdit" type="text" placeholder="VD: P01/Phòng 01" name="name" required>
+                <label><b>Giá(VNĐ)</b></label>
+                <input id ="PriceEdit" type="number" placeholder="VD: 18000000" name="price" required>
+                <label><b>Diện tích (m2)</b></label>
+                <input id ="AreaEdit" type="text" placeholder="VD: 18" name="area" required>
+                <label><b>Số lượng người tối đa</b></label>
+                <input id ="QuantityMaxEdit" type="number" placeholder="VD: 2" name="quantityMax" required>
+                <label><b>Đồ dùng có trong phòng</b></label>
+                <input id ="UtensilEdit" type="text" placeholder="VD: giường, tủ...." name="utensil">
+                <input type="submit" class="btn" value="Đồng ý"/>
+                <button type="button" class="btn cancel" onclick="closeFormEdit()">Hủy</button>
+            </form>
+        </div>
+        <!--bảng thông tin phòng-->
         <div>
-            <div class="container mt-3" sty>
+            <div class="container mt-3">
                 <button class="open-button" onclick="openForm()">Thêm Phòng</button>    
-                <table id="dtBasicExample" class="table table-hover">
+                <table id="dtBasicExample" class="table table-hover table-striped table-bordered table-sm">
                     <thead>
                         <tr>
                             <th class="th-sm">Tên Phòng</th>
-                            <th class="th-sm">Giá</th>
-                            <th class="th-sm">Diện Tích</th>
-                            <th class="th-sm">Số Lượng Tối Đa</th>
+                            <th class="th-sm" style="text-align: center">Giá</th>
+                            <th class="th-sm" style="text-align: center">Diện Tích</th>
+                            <th class="th-sm" style="text-align: center">Số Lượng Tối Đa</th>
                             <th>Đồ Dùng Trong Phòng</th>
-                            <th>Sửa/Xóa</th>
+                            <th style="text-align: center">Sửa/Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <%
-                                        for (int i = 0; i < listRoom.size(); i++) {%>
-                        <tr>
-                            <td><%=listRoom.get(i).getName()%></td>
-                            <td><%=listRoom.get(i).getPrice()%></td>
-                            <td><%=listRoom.get(i).getArea()%></td>
-                            <td><%=listRoom.get(i).getQuantityMax()%></td>
-                            <td><%=listRoom.get(i).getUtensil()%></td>
-                            <td>
-                                <a href="Edit?id=<%=listRoom.get(i).getID()%>">Edit</a>
-                                <a onclick="deleteFunction(<%=listRoom.get(i).getID()%>)" href="#">Delete</a>
-                            </td>
-                        </tr>
-                        <%}%>   
-                        </tr>
-
+                    <script>
+                        roomEdit = new Array();
+                    </script>
+                    <tr>
+                        <%
+                            for (int i = 0; i < listRoom.size(); i++) {%>
+                    <tr>
+                        <td><%=listRoom.get(i).getName()%></td>
+                        <td style="text-align: center"><%=listRoom.get(i).getPrice()%></td>
+                        <td style="text-align: center"><%=listRoom.get(i).getArea()%></td>
+                        <td style="text-align: center"><%=listRoom.get(i).getQuantityMax()%></td>
+                        <td><%=listRoom.get(i).getUtensil()%></td>
+                        <td style="text-align: center">
+                            <script>
+                                roomEdit[<%=i%>] = new Array();
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getID()%>");
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getName()%>");
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getPrice()%>");
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getArea()%>");
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getQuantityMax()%>");
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getUtensil()%>");
+                            </script>
+                            <button onclick="openFormEdit(roomEdit, <%=i%>)">Sửa thông tin phòng</button>
+                            <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listRoom.get(i).getID()%>)" href="#">Xóa</a></button>
+                        </td>
+                    </tr>
+                    <%}%>   
+                    </tr>
                     </tbody>
                 </table>
             </div>

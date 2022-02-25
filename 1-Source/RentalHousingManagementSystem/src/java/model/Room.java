@@ -14,7 +14,7 @@ import java.util.Date;
 public class Room {
     private int ID;
     private String name;
-    private double price;
+    private int price;
     private double area;
     private int quantityMax;
     private String utensil;
@@ -24,7 +24,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(String name, double price, double area, int quantityMax, String utensil, Date createdAt, Date updatedAt) {
+    public Room(String name, int price, double area, int quantityMax, String utensil, Date createdAt, Date updatedAt) {
         this.name = name;
         this.price = price;
         this.area = area;
@@ -34,7 +34,7 @@ public class Room {
         this.updatedAt = updatedAt;
     }
 
-    public Room(int ID, String name, double price, double area, int quantityMax, String utensil, Date createdAt, Date updatedAt) {
+    public Room(int ID, String name, int price, double area, int quantityMax, String utensil, Date createdAt, Date updatedAt) {
         this.ID = ID;
         this.name = name;
         this.price = price;
@@ -61,11 +61,11 @@ public class Room {
         this.name = name;
     }
     
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
