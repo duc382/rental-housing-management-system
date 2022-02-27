@@ -5,22 +5,22 @@
  */
 package controller;
 
-import DAL.AccountDAO;
+import DAL.ContractDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Account;
+import model.Contract;
 
 /**
  *
  * @author coder
  */
-public class LoginController extends HttpServlet {
+public class ContractManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet ContractManageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ContractManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,10 +60,12 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/login.jsp");
+//        processRequest(request, response);
+        ContractDAO DBR = new ContractDAO();
+        ArrayList<Contract> listContract = DBR.getAllContract();
+        request.setAttribute("listContract", listContract);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/contractManage.jsp");
         dispatcher.forward(request, response);
-
     }
 
     /**
@@ -77,36 +79,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = null;
-        String password = null;
-        boolean error = false;
-        if (request.getParameter("username") != null) {
-            username = request.getParameter("username");
-        }
-        if (request.getParameter("password") != null) {
-            password = request.getParameter("password");
-        }
-        if (username == null || password == null) {
-            response.sendRedirect("Login");
-        }
-        AccountDAO DBA = new AccountDAO();
-        Account account = DBA.getAccount(username, password);
-        if (account == null) {
-            error = true;
-            request.setAttribute("error", error);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/login.jsp");
-            dispatcher.forward(request, response);
-        } else {
-            if (account.getRole() == 1) {
-                HttpSession session = request.getSession();
-                session.setAttribute("account", account);
-                response.sendRedirect("HomeManage");
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("account", account);
-                response.sendRedirect("HomeCustomer");
-            }
-        }
+        processRequest(request, response);
     }
 
     /**

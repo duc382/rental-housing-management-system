@@ -13,20 +13,51 @@ import java.util.Date;
  */
 public class Account {
     private int ID;
+    private int roomID;
     private String username;
     private String password;
-    private Date createAt;
+    private int role;
+    private Date createdAt;
     private Date updatedAt;
 
     public Account() {
     }
+    // khoi tao thieu ID
 
-    public Account(int ID, String username, String password, Date createAt, Date updatedAt) {
-        this.ID = ID;
+    public Account(int roomID, String username, String password, int role, Date createdAt, Date updatedAt) {
+        this.roomID = roomID;
         this.username = username;
         this.password = password;
-        this.createAt = createAt;
+        this.role = role;
+        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+    
+    // khoi tao tat ca
+    public Account(int ID, int roomID, String username, String password, int role, Date createdAt, Date updatedAt) {
+        this.ID = ID;
+        this.roomID = roomID;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public int getID() {
@@ -53,12 +84,12 @@ public class Account {
         this.password = password;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getUpdatedAt() {

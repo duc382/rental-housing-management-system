@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAL.AccountDAO;
 import DAL.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,6 +61,8 @@ public class DeleteRoomManageController extends HttpServlet {
         RoomDAO DBR = new RoomDAO();
         int ID = Integer.parseInt(request.getParameter("id"));
         DBR.deleteRoom(ID);
+        AccountDAO DBA = new AccountDAO();
+        DBA.deleteAccount(ID);
         response.sendRedirect("RoomManage");
     }
 

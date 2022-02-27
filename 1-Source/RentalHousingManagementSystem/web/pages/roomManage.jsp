@@ -86,8 +86,10 @@
         </div>
         <!--bảng thông tin phòng-->
         <div>
-            <div class="container mt-3">
-                <button class="open-button" onclick="openForm()">Thêm Phòng</button>    
+            <div class="container mt-3" style="max-width: 76%; margin-left: 12%; margin-right: 12%;">
+                <div style="margin-bottom: 3px">
+                    <button class="open-button" onclick="openForm()">Thêm Phòng</button>    
+                </div>
                 <table id="dtBasicExample" class="table table-hover table-striped table-bordered table-sm">
                     <thead>
                         <tr>
@@ -95,6 +97,7 @@
                             <th class="th-sm" style="text-align: center">Giá</th>
                             <th class="th-sm" style="text-align: center">Diện Tích</th>
                             <th class="th-sm" style="text-align: center">Số Lượng Tối Đa</th>
+                            <th class="th-sm" style="text-align: center">Số Lượng Hiện Tại</th>
                             <th>Đồ Dùng Trong Phòng</th>
                             <th style="text-align: center">Sửa/Xóa</th>
                         </tr>
@@ -106,10 +109,11 @@
                     <%
                         for (int i = 0; i < listRoom.size(); i++) {%>
                     <tr>
-                        <td><%=listRoom.get(i).getName()%></td>
+                        <td class="roomName hired"><h5><%=listRoom.get(i).getName()%></h5></td>
                         <td style="text-align: center"><%=listRoom.get(i).getPrice()%></td>
                         <td style="text-align: center"><%=listRoom.get(i).getArea()%></td>
                         <td style="text-align: center"><%=listRoom.get(i).getQuantityMax()%></td>
+                        <td style="text-align: center"><%=listRoom.get(i).getQuantityCurrent()%></td>
                         <td><%=listRoom.get(i).getUtensil()%></td>
                         <td style="text-align: center">
                             <script>
@@ -120,6 +124,7 @@
                                 roomEdit[<%=i%>].push("<%=listRoom.get(i).getArea()%>");
                                 roomEdit[<%=i%>].push("<%=listRoom.get(i).getQuantityMax()%>");
                                 roomEdit[<%=i%>].push("<%=listRoom.get(i).getUtensil()%>");
+                                roomEdit[<%=i%>].push("<%=listRoom.get(i).getQuantityCurrent()%>");
                             </script>
                             <button onclick="openFormEdit(roomEdit, <%=i%>)">Sửa thông tin phòng</button>
                             <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listRoom.get(i).getID()%>)" href="#">Xóa</a></button>

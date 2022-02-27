@@ -28,7 +28,7 @@ function validateForm(list) {
     var area = document.forms["myForm"]["area"].value;
     var quantityMax = document.forms["myForm"]["quantityMax"].value;
     if (quantityMax <= 0) {
-        alert("Số lượng người tối đa phải là số nguyên và lớn hơn 0");
+        alert("Số lượng người tối đa phải là số nguyên, và lớn hơn 0");
         return(false);
     }
     var areaF;
@@ -61,6 +61,7 @@ function openFormEdit(RoomEdit, position) {
     document.getElementById("QuantityMaxEdit").value = Number.parseInt(RoomEdit[position][4]);
     document.getElementById("UtensilEdit").value = RoomEdit[position][5];
     document.getElementById("myFormEdit").style.display = "block";
+    document.getElementById("QuantityMaxEdit").min = Number.parseInt(RoomEdit[position][6]);
 }
 
 function closeFormEdit() {

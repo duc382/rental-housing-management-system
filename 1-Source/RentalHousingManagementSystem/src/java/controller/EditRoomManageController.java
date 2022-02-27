@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAL.AccountDAO;
 import DAL.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Account;
 import model.Room;
 
 /**
@@ -107,9 +109,17 @@ public class EditRoomManageController extends HttpServlet {
         ZoneId defauZoneId = ZoneId.systemDefault();
         Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
         Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
-        Room room = new Room(ID, name, price, area, quantityMax, utensil, createdAtD, updatedAtD);
+        Room roomAfter = new Room(ID, name, price, area, quantityMax, utensil, createdAtD, updatedAtD);
         RoomDAO DBR = new RoomDAO();
-        DBR.updateRoom(room);
+        Room roomBefore = DBR.getRoomByID(ID);
+        DBR.updateRoom(roomAfter);
+        if (!roomBefore.getName().equalsIgnoreCase(roomAfter.getName())){
+            AccountDAO DBA= new AccountDAO();
+            Account accountBefore = DBA.getAccount(ID);
+            Account accountAfter = new Account(accountBefore.getID(),accountBefore.getRoomID(), name, name, 0, createdAtD, updatedAtD);
+            DBA.updateAccount(accountAfter);
+        }
+        
         response.sendRedirect("RoomManage");
     }
 

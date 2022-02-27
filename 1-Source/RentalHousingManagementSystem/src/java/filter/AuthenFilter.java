@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
-import model.Profile;
 
 /**
  *
@@ -168,9 +167,7 @@ public class AuthenFilter implements Filter {
                 res.sendRedirect("Login");
                 return;
             }
-            AccountDAO DBA = new AccountDAO();
-            Profile profile = DBA.getProfileByAccountID(account.getID());
-            if (profile == null || profile.getRole() != 1){
+            if (account.getRole() != 1){
                 res.sendRedirect("Login");
             } 
         }
@@ -184,8 +181,7 @@ public class AuthenFilter implements Filter {
                 return;
             }
             AccountDAO DBA = new AccountDAO();
-            Profile profile = DBA.getProfileByAccountID(account.getID());
-            if (profile == null || (profile.getRole() != 1 && profile.getRole() != 0)){
+            if (account == null || (account.getRole() != 1 && account.getRole() != 0)){
                 res.sendRedirect("Login");
             } 
         }

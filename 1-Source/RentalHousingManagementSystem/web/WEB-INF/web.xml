@@ -56,6 +56,10 @@
         <servlet-name>EditServicesManage</servlet-name>
         <servlet-class>controller.EditServicesManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContractManage</servlet-name>
+        <servlet-class>controller.ContractManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -104,9 +108,16 @@
         <servlet-name>EditServicesManage</servlet-name>
         <url-pattern>/EditServicesManage</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContractManage</servlet-name>
+        <url-pattern>/ContractManage</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            1000
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>Login</welcome-file>
+    </welcome-file-list>
 </web-app>

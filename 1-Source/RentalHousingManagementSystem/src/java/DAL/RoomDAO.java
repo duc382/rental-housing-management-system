@@ -27,7 +27,7 @@ public class RoomDAO extends BaseDAO {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
-                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getString("Utensil"),
+                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"), rs.getString("Utensil"),
                 rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
                 listRoom.add(room);
             }
@@ -37,18 +37,58 @@ public class RoomDAO extends BaseDAO {
         }
         return(listRoom);
     }
+    
+    // get room by name
+    public Room getRoomByName(String name){
+        ArrayList<Room> listRoom = new ArrayList<>();
+        try {
+            String sql = "Select * from room where name = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
+                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"), rs.getString("Utensil"),
+                rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                return(room);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return(null);
+    }
+    // get room by id
+    public Room getRoomByID(int ID){
+        ArrayList<Room> listRoom = new ArrayList<>();
+        try {
+            String sql = "Select * from room where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, ID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
+                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"), rs.getString("Utensil"),
+                rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                return(room);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return(null);
+    }
     // insert room
     public boolean insertRoom(Room room) {
         try {
-            String sql = "Insert into room(Name,Price,Area,QuantityMax,Utensil,CreatedAt,UpdatedAt) values(?,?,?,?,?,?,?)";
+            String sql = "Insert into room(Name,Price,Area,QuantityMax,QuantityCurrent,Utensil, CreatedAt,UpdatedAt) values(?,?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, room.getName());
             st.setInt(2, room.getPrice());
             st.setDouble(3, room.getArea());
             st.setInt(4, room.getQuantityMax());
-            st.setString(5, room.getUtensil());
-            st.setDate(6, new java.sql.Date(room.getCreatedAt().getTime()));
-            st.setDate(7, new java.sql.Date(room.getUpdatedAt().getTime()));
+            st.setInt(5, room.getQuantityCurrent());
+            st.setString(6, room.getUtensil());
+            st.setDate(7, new java.sql.Date(room.getCreatedAt().getTime()));
+            st.setDate(8, new java.sql.Date(room.getUpdatedAt().getTime()));
             ResultSet rs = st.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);

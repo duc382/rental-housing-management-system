@@ -84,8 +84,10 @@
             </form>
         </div>
         <div>
-            <div class="container mt-3">
-                <button class="open-button" onclick="openForm()">Thêm Dịch Vụ</button>    
+            <div class="container mt-3" style="max-width: 76%; margin-left: 12%; margin-right: 12%;">
+                <div style="margin-bottom: 3px">
+                    <button class="open-button" onclick="openForm()">Thêm Dịch Vụ</button>    
+                </div>
                 <table id="dtTableServices" class="table table-hover table-striped table-bordered table-sm">
                     <thead>
                         <tr>

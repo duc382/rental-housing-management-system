@@ -17,14 +17,15 @@ public class Room {
     private int price;
     private double area;
     private int quantityMax;
+    private int quantityCurrent;
     private String utensil;
     private Date createdAt;
     private Date updatedAt;
 
     public Room() {
     }
-
-    public Room(String name, int price, double area, int quantityMax, String utensil, Date createdAt, Date updatedAt) {
+    // khoi tao cho room moi
+    public Room(String name, int price, double area, int quantityMax, int quantityCurrent, String utensil, Date createdAt, Date updatedAt) {
         this.name = name;
         this.price = price;
         this.area = area;
@@ -33,7 +34,7 @@ public class Room {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
+    // khoi tao cho room update
     public Room(int ID, String name, int price, double area, int quantityMax, String utensil, Date createdAt, Date updatedAt) {
         this.ID = ID;
         this.name = name;
@@ -44,7 +45,19 @@ public class Room {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
+    // khoi tao cho room day du
+    public Room(int ID, String name, int price, double area, int quantityMax, int quantityCurrent, String utensil, Date createdAt, Date updatedAt) {
+        this.ID = ID;
+        this.name = name;
+        this.price = price;
+        this.area = area;
+        this.quantityMax = quantityMax;
+        this.utensil = utensil;
+        this.quantityCurrent = quantityCurrent;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+    
     public int getID() {
         return ID;
     }
@@ -89,6 +102,14 @@ public class Room {
         return utensil;
     }
 
+    public int getQuantityCurrent() {
+        return quantityCurrent;
+    }
+
+    public void setQuantityCurrent(int quantityCurrent) {
+        this.quantityCurrent = quantityCurrent;
+    }
+    
     public void setUtensil(String utensil) {
         this.utensil = utensil;
     }
