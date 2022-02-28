@@ -60,6 +60,10 @@
         <servlet-name>ContractManage</servlet-name>
         <servlet-class>controller.ContractManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddContractManage</servlet-name>
+        <servlet-class>controller.AddContractManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>ContractManage</servlet-name>
         <url-pattern>/ContractManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddContractManage</servlet-name>
+        <url-pattern>/AddContractManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

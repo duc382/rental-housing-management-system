@@ -23,6 +23,11 @@ public class ServicesOfContract {
         this.contractID = contractID;
     }
 
+    public ServicesOfContract(int servicesID, int contractID) {
+        this.servicesID = servicesID;
+        this.contractID = contractID;
+    }
+    
     public int getID() {
         return ID;
     }

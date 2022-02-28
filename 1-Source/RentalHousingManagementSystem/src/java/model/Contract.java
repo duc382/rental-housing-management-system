@@ -14,6 +14,7 @@ import java.util.Date;
 public class Contract {
     private int ID;
     private int roomID;
+    private String RepresentativeName;
     private String note;
     private int status;
     private Date startAt;
@@ -24,8 +25,9 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int roomID, String note, int status, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
+    public Contract(int roomID, String RepresentativeName, String note, int status, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
         this.roomID = roomID;
+        this.RepresentativeName = RepresentativeName;
         this.note = note;
         this.status = status;
         this.startAt = startAt;
@@ -34,9 +36,10 @@ public class Contract {
         this.updatedAt = updatedAt;
     }
 
-    public Contract(int ID, int roomID, String note, int status, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
+    public Contract(int ID, int roomID, String RepresentativeName, String note, int status, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
         this.ID = ID;
         this.roomID = roomID;
+        this.RepresentativeName = RepresentativeName;
         this.note = note;
         this.status = status;
         this.startAt = startAt;
@@ -44,6 +47,16 @@ public class Contract {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public String getRepresentativeName() {
+        return RepresentativeName;
+    }
+
+    public void setRepresentativeName(String RepresentativeName) {
+        this.RepresentativeName = RepresentativeName;
+    }
+    
+    
 
     public int getID() {
         return ID;

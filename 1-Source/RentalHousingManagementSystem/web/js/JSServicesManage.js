@@ -42,10 +42,10 @@ function validateForm(list) {
         priceF = parseFloat(price);
         if (priceF == price) {
             if (priceF <= 0 || priceF < OriginCostF) {
-                throw "error < 0"
+                throw ""
             }
         } else {
-            throw "error format";
+            throw "";
         }
     } catch (ex) {
         alert("Giá bán ra phải là số thực lớn hơn 0 và lớn hơn hoặc bằng giá gốc");

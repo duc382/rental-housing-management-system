@@ -4,6 +4,7 @@
     Author     : coder
 --%>
 
+<%@page import="DAL.RoomDAO"%>
 <%@page import="model.Room"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="header"></div>
-        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+            <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
         <label for="openSidebarMenu" class="sidebarIconToggle">
             <div class="spinner diagonal part-1"></div>
             <div class="spinner horizontal"></div>
@@ -23,8 +23,8 @@
             <ul class="sidebarMenuInner">
                 <li><a href="HomeManage">Trang Chủ</a></li>
                 <li><a href="RoomManage">Quản Lý Phòng</a></li>
-                <li><a href="ContractManage">Quản Lý Hợp Đồng</a></li>
                 <li><a href="ServicesManage">Quản Lý Dịch Vụ</a></li>
+                <li><a href="ContractManage">Quản Lý Hợp Đồng</a></li>
                 <li><a href="RenterManage">Quản Lý Người Thuê</a></li>
                 <li><a href="AnalysticManage">Thống Kê Thu Chi</a></li>
                 <li><a href="Logout">Đăng Xuất</a></li>

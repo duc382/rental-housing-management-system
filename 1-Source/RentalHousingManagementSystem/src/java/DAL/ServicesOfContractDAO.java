@@ -11,62 +11,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Contract;
+import model.ServicesOfContract;
 
 /**
  *
  * @author coder
  */
-public class ContractDAO extends BaseDAO{
-        // get all services
-    public ArrayList<Contract> getAllContract(){
-        ArrayList<Contract> listContract = new ArrayList<>();
+public class ServicesOfContractDAO extends BaseDAO{
+    // get all services
+    public ArrayList<ServicesOfContract> getAllServicesOfContractDAO(){
+        ArrayList<ServicesOfContract> listServicesOfContract = new ArrayList<>();
         try {
-            String sql = "Select * from Contract";
+            String sql = "Select * from ServicesOfContract";
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Contract contract = new  Contract(rs.getInt("ID"), rs.getInt("RoomID"),rs.getString("RepresentativeName"), rs.getString("Note"), 
-                rs.getInt("status"),rs.getDate("StartAt"), rs.getDate("EndAt"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
-                listContract.add(contract);
+                ServicesOfContract servicesOfContract = new  ServicesOfContract(rs.getInt("ID"), rs.getInt("ServicesID"), rs.getInt("ContractID"));
+                listServicesOfContract.add(servicesOfContract);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServicesOfContractDAO.class.getName()).log(Level.SEVERE, null, ex);
             return(null);
         }
-        return(listContract);
+        return(listServicesOfContract);
     }
-    // get Contract by RoomID and status = 1
-    public Contract getContractByRooIDAndStatus(int roomID, int status){
+    // insert Services Of Contract
+    public boolean insertServicesOfContract(ServicesOfContract servicesOfContract) {
         try {
-            String sql = "Select * from Contract where roomID = ? and status = ?";
+            String sql = "Insert into ServicesOfContract(ServicesID,ContractID) values(?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, roomID);
-            st.setInt(2, status);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Contract contract = new  Contract(rs.getInt("ID"), rs.getInt("RoomID"),rs.getString("RepresentativeName"), rs.getString("Note"), 
-                rs.getInt("status"),rs.getDate("StartAt"), rs.getDate("EndAt"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
-                return(contract);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ContractDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return(null);
-    }
-    // insert services
-    public boolean insertContract(Contract contract) {
-        try {
-            String sql = "Insert into Contract(RoomID,Note,status,startAt,endAt,CreatedAt,UpdatedAt,RepresentativeName) values(?,?,?,?,?,?,?,?)";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, contract.getRoomID());
-            st.setString(2, contract.getNote());
-            st.setInt(3, contract.getStatus());
-            st.setDate(4, new java.sql.Date(contract.getStartAt().getTime()));
-            st.setDate(5, new java.sql.Date(contract.getEndAt().getTime()));
-            st.setDate(6, new java.sql.Date(contract.getCreatedAt().getTime()));
-            st.setDate(7, new java.sql.Date(contract.getUpdatedAt().getTime()));
-            st.setString(8, contract.getRepresentativeName());
+            st.setInt(1, servicesOfContract.getServicesID());
+            st.setInt(2, servicesOfContract.getContractID());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,9 +79,9 @@ public class ContractDAO extends BaseDAO{
 //           Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
 //       }
 //   }
-
     @Override
     public ArrayList getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
