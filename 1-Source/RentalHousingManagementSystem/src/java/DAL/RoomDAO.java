@@ -80,7 +80,7 @@ public class RoomDAO extends BaseDAO {
     public ArrayList<Room> getRoomEmpty(){
         ArrayList<Room> listRoom = new ArrayList<>();
         try {
-            String sql = "Select * from room where quantitycurrent = 0 ";
+            String sql = "Select * from room where status = 0 or status is null";
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -93,6 +93,20 @@ public class RoomDAO extends BaseDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return(listRoom);
+    }
+    // update status of room
+    public boolean updateStatus(int RoomID, int status){
+        try {
+            String sql = "update room set status = ? where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, RoomID);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return(false);
+        }
+        return(true);
     }
     // insert room
     public boolean insertRoom(Room room) {

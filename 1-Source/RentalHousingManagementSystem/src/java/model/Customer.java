@@ -45,6 +45,35 @@ public class Customer {
         this.updatedAt = updatedAt;
     }
 
+    public Customer(int contractID, String name, String phoneNumber, Date DOB, String CCCD, String address, String job, String email, int sex, String relativeNumber, Date createdAt, Date updatedAt) {
+        this.contractID = contractID;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.DOB = DOB;
+        this.CCCD = CCCD;
+        this.address = address;
+        this.job = job;
+        this.email = email;
+        this.sex = sex;
+        this.relativeNumber = relativeNumber;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Customer(String name, String phoneNumber, Date DOB, String CCCD, String address, String job, String email, int sex, String relativeNumber, Date createdAt, Date updatedAt) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.DOB = DOB;
+        this.CCCD = CCCD;
+        this.address = address;
+        this.job = job;
+        this.email = email;
+        this.sex = sex;
+        this.relativeNumber = relativeNumber;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+    
     public int getID() {
         return ID;
     }

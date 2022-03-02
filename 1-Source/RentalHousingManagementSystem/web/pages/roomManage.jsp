@@ -132,7 +132,6 @@
                         </td>
                     </tr>
                     <%}%>   
-                    </tr>
                     </tbody>
                 </table>
             </div>

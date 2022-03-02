@@ -6,6 +6,8 @@
 package controller;
 
 import DAL.ContractDAO;
+import DAL.CustomerDAO;
+import DAL.RoomDAO;
 import DAL.ServicesOfContractDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Contract;
+import model.Customer;
 import model.ServicesOfContract;
 
 /**
@@ -86,7 +89,7 @@ public class AddContractManageController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         int roomID = Integer.parseInt(request.getParameter("roomID"));
-        String representative = request.getParameter("representative");
+        int CustomerID = Integer.parseInt(request.getParameter("CustomerID"));
         String note = request.getParameter("note");
         String startAtS = request.getParameter("startAt");
         String endAtS = request.getParameter("endAt");
@@ -105,10 +108,22 @@ public class AddContractManageController extends HttpServlet {
         Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
         Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
         String[] listServicesID = request.getParameterValues("ServicesID");
-        Contract contract = new Contract(roomID, representative, note, 1, startAt, endAt, createdAtD, updatedAtD);
+        // lay nguoi theo id de lay ten nguoi dai dien
+        CustomerDAO DBCus = new CustomerDAO();
+        Customer customer = DBCus.getCustomerByID(CustomerID);
+        String relativeName = customer.getName()+"("+customer.getPhoneNumber()+")";
+        // khoi tao hop dong va them hop dong vao db
+        Contract contract = new Contract(roomID, relativeName, note, 1, startAt, endAt, createdAtD, updatedAtD);
         ContractDAO DBC = new ContractDAO();
         DBC.insertContract(contract);
+        // thay doi trang thai cua phong
+        RoomDAO DBR = new RoomDAO();
+        DBR.updateStatus(roomID, 1);
+        // lay thong tin hop dong 
         Contract contractNew = DBC.getContractByRooIDAndStatus(roomID, 1);
+        // them ma hop dong cho nguoi thue
+        DBCus.updateContractForCustomer(customer.getID(), contractNew.getID());
+        // ket noi dich vu va hop dong
         ServicesOfContractDAO DBSOF = new ServicesOfContractDAO();
         for (int i = 0; i < listServicesID.length; i++){
             ServicesOfContract servicesOfContract = new ServicesOfContract(Integer.parseInt(listServicesID[i]), contractNew.getID());

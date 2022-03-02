@@ -4,6 +4,8 @@
     Author     : coder
 --%>
 
+<%@page import="DAL.CustomerDAO"%>
+<%@page import="model.Customer"%>
 <%@page import="model.Room"%>
 <%@page import="DAL.RoomDAO"%>
 <%@page import="model.Services"%>
@@ -48,6 +50,7 @@
             ArrayList<Contract> listContract = (ArrayList<Contract>) request.getAttribute("listContract");
             ServicesDAO DAS = new ServicesDAO();
             RoomDAO DBR = new RoomDAO();
+            CustomerDAO DBC= new CustomerDAO();
         %>
         
         <%@include file="sidebarAndHeader.jsp"%>
@@ -66,9 +69,15 @@
                     </select>
                 </div>
                 <label><b>Người đại diện</b></label>
-                <br>
-                <input type="text" name="representative" required>
-                <br>
+                <div style="height: auto" >
+                    <select class="form-control selectpicker droplist" name="CustomerID" data-live-search="true">
+                        <%
+                            ArrayList<Customer> listCustomer = DBC.getCustomerNoneContract();
+                            for (int i = 0; i < listCustomer.size(); i++){%>
+                            <option data-tokens="<%=listCustomer.get(i).getName()+"("+listCustomer.get(i).getPhoneNumber()+")"%>" value="<%=listCustomer.get(i).getID()%>"><%=listCustomer.get(i).getName()+"("+listCustomer.get(i).getPhoneNumber()+")"%></option>
+                        <%}%> 
+                    </select>
+                </div>
                 <label><b>Ngày bắt đầu</b></label>
                 <br>
                 <input id="startAt" type="date" name="startAt" required>

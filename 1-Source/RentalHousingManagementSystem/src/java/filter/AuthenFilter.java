@@ -171,7 +171,7 @@ public class AuthenFilter implements Filter {
                 res.sendRedirect("Login");
             } 
         }
-        if (url.contains("Customer")){
+        if (url.contains("guest")){
             HttpServletRequest req = (HttpServletRequest) wrappedRequest;
             HttpServletResponse res = (HttpServletResponse) wrappedResponse;
             HttpSession session = req.getSession();

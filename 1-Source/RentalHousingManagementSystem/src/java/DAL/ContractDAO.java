@@ -54,6 +54,7 @@ public class ContractDAO extends BaseDAO{
         }
         return(null);
     }
+    
     // insert services
     public boolean insertContract(Contract contract) {
         try {
