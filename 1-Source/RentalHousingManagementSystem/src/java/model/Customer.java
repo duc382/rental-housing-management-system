@@ -44,7 +44,6 @@ public class Customer {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
     public Customer(int contractID, String name, String phoneNumber, Date DOB, String CCCD, String address, String job, String email, int sex, String relativeNumber, Date createdAt, Date updatedAt) {
         this.contractID = contractID;
         this.name = name;
@@ -59,7 +58,7 @@ public class Customer {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
+    
     public Customer(String name, String phoneNumber, Date DOB, String CCCD, String address, String job, String email, int sex, String relativeNumber, Date createdAt, Date updatedAt) {
         this.name = name;
         this.phoneNumber = phoneNumber;

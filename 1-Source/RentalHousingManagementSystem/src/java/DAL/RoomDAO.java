@@ -94,19 +94,23 @@ public class RoomDAO extends BaseDAO {
         }
         return(listRoom);
     }
-    // update status of room
-    public boolean updateStatus(int RoomID, int status){
+    // get room còn dư slot
+    public ArrayList<Room> getRoomRedundantSlot(){
+        ArrayList<Room> listRoom = new ArrayList<>();
         try {
-            String sql = "update room set status = ? where ID = ?";
+            String sql = "Select * from room where status = 1 and (quantitycurrent < QuantityMax)";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, status);
-            st.setInt(2, RoomID);
-            st.executeUpdate();
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
+                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"), rs.getString("Utensil"),
+                rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                listRoom.add(room);
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return(false);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return(true);
+        return(listRoom);
     }
     // insert room
     public boolean insertRoom(Room room) {
@@ -128,6 +132,22 @@ public class RoomDAO extends BaseDAO {
         }
         return true;
     }
+    
+    // update status of room
+    public boolean updateStatus(int RoomID, int status){
+        try {
+            String sql = "update room set status = ? where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, RoomID);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return(false);
+        }
+        return(true);
+    }
+    
     // update room
     public boolean  updateRoom(Room room){
         try {
@@ -147,6 +167,21 @@ public class RoomDAO extends BaseDAO {
         }
         return true;
     }
+    // update slot in room quantitycurrent-k
+    public boolean updateSlot(int RoomID, int k){
+        try {
+            String sql = "update room set quantitycurrent = quantitycurrent-? where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, k);
+            st.setInt(2, RoomID);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return(false);
+        }
+        return(true);
+    }
+    
     // delete room by id
     public void deleteRoom(int id) {
        try {

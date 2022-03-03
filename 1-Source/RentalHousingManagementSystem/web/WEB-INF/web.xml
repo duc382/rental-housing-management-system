@@ -72,6 +72,18 @@
         <servlet-name>AddCustomerManage</servlet-name>
         <servlet-class>controller.AddCustomerManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCustomerManage</servlet-name>
+        <servlet-class>controller.EditCustomerManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerManage</servlet-name>
+        <servlet-class>controller.DeleteCustomerManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeRoomForCustomerManage</servlet-name>
+        <servlet-class>controller.ChangeRoomForCustomerManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -135,6 +147,18 @@
     <servlet-mapping>
         <servlet-name>AddCustomerManage</servlet-name>
         <url-pattern>/AddCustomerManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomerManage</servlet-name>
+        <url-pattern>/EditCustomerManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerManage</servlet-name>
+        <url-pattern>/DeleteCustomerManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeRoomForCustomerManage</servlet-name>
+        <url-pattern>/ChangeRoomForCustomerManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
