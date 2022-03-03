@@ -54,7 +54,23 @@ public class ContractDAO extends BaseDAO{
         }
         return(null);
     }
-    
+    // get ContractID
+    public Contract getContractByContractID(int ID){
+        try {
+            String sql = "Select * from Contract where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, ID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Contract contract = new  Contract(rs.getInt("ID"), rs.getInt("RoomID"),rs.getString("RepresentativeName"), rs.getString("Note"), 
+                rs.getInt("status"),rs.getDate("StartAt"), rs.getDate("EndAt"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                return(contract);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ContractDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return(null);
+    }
     // insert services
     public boolean insertContract(Contract contract) {
         try {

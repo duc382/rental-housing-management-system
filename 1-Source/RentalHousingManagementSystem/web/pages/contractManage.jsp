@@ -33,7 +33,6 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
         <!--hết bs-->
         <link rel="stylesheet" href="css/StyleContractManage.css">
-        <link rel="stylesheet" href="css/StyleSidebar.css">
         <script src="js/JSContractManage.js"></script>
         <script>
             $(document).ready(function () {

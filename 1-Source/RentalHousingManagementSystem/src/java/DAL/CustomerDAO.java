@@ -40,7 +40,7 @@ public class CustomerDAO extends BaseDAO {
         return (listCustomer);
     }
 
-    // insert Customer
+    // insert Customer co contractID
     public boolean insertCustomer(Customer customer) {
         try {
             String sql = "Insert into Customer(ContractID,Name,PhoneNumber,DOB,CCCD,Address,job,Email,sex,RelativePhoneNumber,createdAt,updatedAt) values(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -57,6 +57,29 @@ public class CustomerDAO extends BaseDAO {
             st.setString(10, customer.getRelativeNumber());
             st.setDate(11, new java.sql.Date(customer.getCreatedAt().getTime()));
             st.setDate(12, new java.sql.Date(customer.getUpdatedAt().getTime()));
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    // insert Customer co contractID
+    public boolean insertCustomerNoneContractID(Customer customer) {
+        try {
+            String sql = "Insert into Customer(Name,PhoneNumber,DOB,CCCD,Address,job,Email,sex,RelativePhoneNumber,createdAt,updatedAt) values(?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, customer.getName());
+            st.setString(2, customer.getPhoneNumber());
+            st.setDate(3, new java.sql.Date(customer.getDOB().getTime()));
+            st.setString(4, customer.getCCCD());
+            st.setString(5, customer.getAddress());
+            st.setString(6, customer.getJob());
+            st.setString(7, customer.getEmail());
+            st.setInt(8, customer.getSex());
+            st.setString(9, customer.getRelativeNumber());
+            st.setDate(10, new java.sql.Date(customer.getCreatedAt().getTime()));
+            st.setDate(11, new java.sql.Date(customer.getUpdatedAt().getTime()));
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -68,6 +68,10 @@
         <servlet-name>CustomerManage</servlet-name>
         <servlet-class>controller.CustomerManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCustomerManage</servlet-name>
+        <servlet-class>controller.AddCustomerManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>CustomerManage</servlet-name>
         <url-pattern>/CustomerManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomerManage</servlet-name>
+        <url-pattern>/AddCustomerManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
