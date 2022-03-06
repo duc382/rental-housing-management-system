@@ -12,27 +12,25 @@ import DAL.ServicesOfContractDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Contract;
-import model.Customer;
 import model.Room;
+import model.Services;
 import model.ServicesOfContract;
 
 /**
  *
  * @author coder
  */
-public class AddContractManageController extends HttpServlet {
+public class EditContractManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,10 +49,10 @@ public class AddContractManageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddContractManageController</title>");
+            out.println("<title>Servlet EditContractManageController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddContractManageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditContractManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -86,10 +84,9 @@ public class AddContractManageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        int contractID = Integer.parseInt(request.getParameter("contractID"));
         int CustomerID = Integer.parseInt(request.getParameter("CustomerID"));
         String note = request.getParameter("note");
         String startAtS = request.getParameter("startAt");
@@ -108,29 +105,18 @@ public class AddContractManageController extends HttpServlet {
         ZoneId defauZoneId = ZoneId.systemDefault();
         Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
         Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
-        String[] listServicesID = request.getParameterValues("ServicesID");
-        // lay ten phong theo id 
-        RoomDAO DBRoom = new RoomDAO();
-        Room room = DBRoom.getRoomByID(roomID);
-        String roomName = room.getName();
-        // khoi tao hop dong va them hop dong vao db
-        Contract contract = new Contract(roomID, CustomerID, note, 1, roomName, startAt, endAt, createdAtD, updatedAtD);
+
+        // sửa lại thông tin hợp đồng: người đại diện, ngày bắt đầu, ngày kết thúc, note, dịch vụ
+        Contract contract = new Contract(contractID, 0, CustomerID, note, 1, "", startAt, endAt, createdAtD, updatedAtD);
         ContractDAO DBC = new ContractDAO();
-        DBC.insertContract(contract);
-        // thay doi trang thai cua phong
-        RoomDAO DBR = new RoomDAO();
-        DBR.updateStatus(roomID, 1);
-        DBR.updateSlot(roomID, -1);
-        // lay thong tin hop dong 
-        Contract contractNew = DBC.getContractByRooIDAndStatus(roomID, 1);
-        // them ma hop dong cho nguoi thue
-        CustomerDAO DBCus = new CustomerDAO();
-        DBCus.updateContractForCustomer(CustomerID, contractNew.getID());
-        // ket noi dich vu va hop dong
+        DBC.updateContract(contract);
+        // xử lý sửa services
+        String[] listServicesID = request.getParameterValues("ServicesID");
         ServicesOfContractDAO DBSOF = new ServicesOfContractDAO();
+        DBSOF.deleteAllServicesByContractID(contractID);
         if (listServicesID != null) {
             for (int i = 0; i < listServicesID.length; i++) {
-                ServicesOfContract servicesOfContract = new ServicesOfContract(Integer.parseInt(listServicesID[i]), contractNew.getID());
+                ServicesOfContract servicesOfContract = new ServicesOfContract(Integer.parseInt(listServicesID[i]), contractID);
                 DBSOF.insertServicesOfContract(servicesOfContract);
             }
         }

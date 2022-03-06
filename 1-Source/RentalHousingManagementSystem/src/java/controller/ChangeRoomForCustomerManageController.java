@@ -81,16 +81,17 @@ public class ChangeRoomForCustomerManageController extends HttpServlet {
         RoomDAO DBRoom = new RoomDAO();
         ContractDAO DBCon = new ContractDAO();
         CustomerDAO DBCus = new CustomerDAO();
-        // tang so luong nguoi o phong hien tai
+        // tru so luong nguoi o phong hien tai
         if (roomIDCurrent != 0){
-            DBRoom.updateSlot(roomIDCurrent, -1);
+            DBRoom.updateSlot(roomIDCurrent, 1);
         }
-        // tru so luong nguoi o phong moi
-        DBRoom.updateSlot(roomIDNew, 1);
+        // tang so luong nguoi o phong moi
+        DBRoom.updateSlot(roomIDNew, -1);
         // lay contract theo roomID moi va status = 1
         Contract contract = DBCon.getContractByRooIDAndStatus(roomIDNew, 1);
         // update contractID cho customer
         DBCus.updateContractForCustomer(customerID, contract.getID());
+        response.sendRedirect("CustomerManage");
     }
 
     /**

@@ -17,24 +17,45 @@ import model.ServicesOfContract;
  *
  * @author coder
  */
-public class ServicesOfContractDAO extends BaseDAO{
+public class ServicesOfContractDAO extends BaseDAO {
+
     // get all services
-    public ArrayList<ServicesOfContract> getAllServicesOfContractDAO(){
+    public ArrayList<ServicesOfContract> getAllServicesOfContract() {
         ArrayList<ServicesOfContract> listServicesOfContract = new ArrayList<>();
         try {
             String sql = "Select * from ServicesOfContract";
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                ServicesOfContract servicesOfContract = new  ServicesOfContract(rs.getInt("ID"), rs.getInt("ServicesID"), rs.getInt("ContractID"));
+                ServicesOfContract servicesOfContract = new ServicesOfContract(rs.getInt("ID"), rs.getInt("ServicesID"), rs.getInt("ContractID"));
                 listServicesOfContract.add(servicesOfContract);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServicesOfContractDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return(null);
+            return (null);
         }
-        return(listServicesOfContract);
+        return (listServicesOfContract);
     }
+
+    // get all services
+    public ArrayList<ServicesOfContract> getAllServicesOfContractByContractID(int contractID) {
+        ArrayList<ServicesOfContract> listServicesOfContract = new ArrayList<>();
+        try {
+            String sql = "Select * from ServicesOfContract where contractID=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, contractID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                ServicesOfContract servicesOfContract = new ServicesOfContract(rs.getInt("ID"), rs.getInt("ServicesID"), rs.getInt("ContractID"));
+                listServicesOfContract.add(servicesOfContract);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicesOfContractDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return (null);
+        }
+        return (listServicesOfContract);
+    }
+
     // insert Services Of Contract
     public boolean insertServicesOfContract(ServicesOfContract servicesOfContract) {
         try {
@@ -67,7 +88,19 @@ public class ServicesOfContractDAO extends BaseDAO{
 //            return false;
 //        }
 //        return true;
-//    }
+//    
+    // xóa toàn bộ sevices theo contractID
+
+    public void deleteAllServicesByContractID(int contractID) {
+        try {
+            String sql = "DELETE ServicesOfContract WHERE contractID=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, contractID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 //    // delete services by id
 //    public void deleteServices(int id) {
 //       try {
@@ -79,9 +112,10 @@ public class ServicesOfContractDAO extends BaseDAO{
 //           Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
 //       }
 //   }
+
     @Override
     public ArrayList getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

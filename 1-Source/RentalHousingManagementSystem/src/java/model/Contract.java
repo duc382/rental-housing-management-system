@@ -14,9 +14,10 @@ import java.util.Date;
 public class Contract {
     private int ID;
     private int roomID;
-    private String RepresentativeName;
+    private int CustomerIDRepresentative;
     private String note;
     private int status;
+    private String roomName;
     private Date startAt;
     private Date endAt;
     private Date createdAt;
@@ -25,38 +26,46 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int roomID, String RepresentativeName, String note, int status, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
-        this.roomID = roomID;
-        this.RepresentativeName = RepresentativeName;
-        this.note = note;
-        this.status = status;
-        this.startAt = startAt;
-        this.endAt = endAt;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Contract(int ID, int roomID, String RepresentativeName, String note, int status, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
+    public Contract(int ID, int roomID, int CustomerIDRepresentative, String note, int status, String roomName, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
         this.ID = ID;
         this.roomID = roomID;
-        this.RepresentativeName = RepresentativeName;
+        this.CustomerIDRepresentative = CustomerIDRepresentative;
         this.note = note;
         this.status = status;
+        this.roomName = roomName;
         this.startAt = startAt;
         this.endAt = endAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public String getRepresentativeName() {
-        return RepresentativeName;
+    public Contract(int roomID, int CustomerIDRepresentative, String note, int status, String roomName, Date startAt, Date endAt, Date createdAt, Date updatedAt) {
+        this.roomID = roomID;
+        this.CustomerIDRepresentative = CustomerIDRepresentative;
+        this.note = note;
+        this.status = status;
+        this.roomName = roomName;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public void setRepresentativeName(String RepresentativeName) {
-        this.RepresentativeName = RepresentativeName;
+    public int getCustomerIDRepresentative() {
+        return CustomerIDRepresentative;
     }
-    
-    
+
+    public void setCustomerIDRepresentative(int CustomerIDRepresentative) {
+        this.CustomerIDRepresentative = CustomerIDRepresentative;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 
     public int getID() {
         return ID;

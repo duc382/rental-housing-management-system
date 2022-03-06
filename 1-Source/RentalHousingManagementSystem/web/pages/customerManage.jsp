@@ -19,17 +19,16 @@
         <title>Quản lý người thuê</title>
         <!--bs-->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"
-              rel="stylesheet" />
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
         <!--hết bs-->
         <link rel="stylesheet" href="css/StyleCustomerManage.css">
         <script src="js/JSCustomerManage.js"></script>
@@ -148,7 +147,7 @@
             <form class="form-container" name="myFormEdit" action="EditCustomerManage" method="post">
                 <h1 style="text-align: center;">Thông Tin Người Thuê</h1>
                 <table style="max-width: none">
-                    <input style="visibility: hidden" type="text" name="IDEdit" id="IDEdit" required>
+                    <input style="visibility: hidden; position: absolute" type="text" name="IDEdit" id="IDEdit" required>
                     <tr>
                         <td>Họ Tên</td>
                         <td colspan="3"><input type="text" name="nameEdit" id="nameEdit" required></td>
@@ -202,8 +201,8 @@
                     <select class="form-control selectpicker droplist" name="roomIDNew" data-live-search="true">
                         <%
                             ArrayList<Room> listRoom = DBRoom.getRoomRedundantSlot();
-                            for (int i = 0; i < listRoom.size(); i++){%>
-                            <option data-tokens="<%=listRoom.get(i).getName()%>" value="<%=listRoom.get(i).getID()%>"><%=listRoom.get(i).getName()%></option>
+                            for (int i = 0; i < listRoom.size(); i++) {%>
+                        <option data-tokens="<%=listRoom.get(i).getName()%>" value="<%=listRoom.get(i).getID()%>"><%=listRoom.get(i).getName()%></option>
                         <%}%> 
                     </select>
                 </div>

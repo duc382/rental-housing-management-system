@@ -128,7 +128,24 @@ public class CustomerDAO extends BaseDAO {
         }
         return (null);
     }
-
+    // lay nguoi theo contract id
+    public Customer getCustomerInContract(int contractID) {
+        try {
+            String sql = "Select * from Customer where contractID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, contractID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Customer customer = new Customer(rs.getInt("ID"), rs.getInt("ContractID"), rs.getString("Name"), rs.getString("PhoneNumber"),
+                        rs.getDate("DOB"), rs.getString("CCCD"), rs.getString("Address"), rs.getString("job"), rs.getString("Email"), rs.getInt("sex"),
+                        rs.getString("RelativePhoneNumber"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                return (customer);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return (null);
+    }
     // update room for customer by relative and romid
     public boolean updateContractForCustomer(int ID, int ContractID) {
         try {
