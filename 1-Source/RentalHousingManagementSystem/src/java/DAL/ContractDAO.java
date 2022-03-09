@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Contract;
@@ -115,20 +116,38 @@ public class ContractDAO extends BaseDAO {
         }
         return true;
     }
-//    // delete services by id
-//    public void deleteServices(int id) {
-//       try {
-//           String sql = "DELETE Services WHERE id=?";
-//           PreparedStatement statement = connection.prepareStatement(sql);
-//           statement.setInt(1, id);
-//           statement.executeUpdate();
-//       } catch (SQLException ex) {
-//           Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
-//       }
-//   }
+    public boolean  updateRoomNameContract(String roomName, Date updatedAt, int ID){
+        try {
+            String sql = "update Contract set RoomName=?, updatedAt = ? where id=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1,roomName);
+            st.setDate(2, new java.sql.Date(updatedAt.getTime()));
+            st.setInt(3, ID);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ContractDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    // cancel contract by id
+    public void cancelContractByID(String id, Date updatedAt) {
+       try {
+           String sql = "update Contract set roomID = null, status = 0, UpdatedAt = ? where ID = ?";
+           PreparedStatement st = connection.prepareStatement(sql);
+           st.setDate(1, new java.sql.Date(updatedAt.getTime()));
+           st.setString(2, id);
+           st.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+       }
+   }
 
     @Override
     public ArrayList getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+//    public static void main(String[] args) {
+//        ContractDAO
+//    }
 }

@@ -39,7 +39,7 @@ public class AccountDAO extends BaseDAO {
     }
     
     // get account by RoomID
-    public Account getAccount(int roomID) {
+    public Account getAccountByRoomID(int roomID) {
         try {
             String sql = "Select * from account where RoomID = ?";
             PreparedStatement st = connection.prepareStatement(sql);

@@ -147,7 +147,19 @@ public class RoomDAO extends BaseDAO {
         }
         return(true);
     }
-    
+    // update status and quantityCurrent
+    public boolean updateStatusAndQuantityCurrent(String RoomID){
+        try {
+            String sql = "update room set status = 0, quantitycurrent = 0 where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, RoomID);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return(false);
+        }
+        return(true);
+    }
     // update room
     public boolean  updateRoom(Room room){
         try {

@@ -18,6 +18,7 @@ public class Room {
     private double area;
     private int quantityMax;
     private int quantityCurrent;
+    private int status;
     private String utensil;
     private Date createdAt;
     private Date updatedAt;
@@ -56,6 +57,27 @@ public class Room {
         this.quantityCurrent = quantityCurrent;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Room(int ID, String name, int price, double area, int quantityMax, int quantityCurrent, int status, String utensil, Date createdAt, Date updatedAt) {
+        this.ID = ID;
+        this.name = name;
+        this.price = price;
+        this.area = area;
+        this.quantityMax = quantityMax;
+        this.quantityCurrent = quantityCurrent;
+        this.status = status;
+        this.utensil = utensil;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
     
     public int getID() {

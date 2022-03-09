@@ -88,6 +88,10 @@
         <servlet-name>EditContractManage</servlet-name>
         <servlet-class>controller.EditContractManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelContractManage</servlet-name>
+        <servlet-class>controller.CancelContractManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>EditContractManage</servlet-name>
         <url-pattern>/EditContractManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelContractManage</servlet-name>
+        <url-pattern>/CancelContractManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

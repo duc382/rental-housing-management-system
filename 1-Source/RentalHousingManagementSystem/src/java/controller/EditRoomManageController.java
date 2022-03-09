@@ -6,6 +6,7 @@
 package controller;
 
 import DAL.AccountDAO;
+import DAL.ContractDAO;
 import DAL.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
+import model.Contract;
 import model.Room;
 
 /**
@@ -113,13 +115,18 @@ public class EditRoomManageController extends HttpServlet {
         RoomDAO DBR = new RoomDAO();
         Room roomBefore = DBR.getRoomByID(ID);
         DBR.updateRoom(roomAfter);
+        // sửa tên và pass của account nếu tên phòng bị thay đổi
         if (!roomBefore.getName().equalsIgnoreCase(roomAfter.getName())){
             AccountDAO DBA= new AccountDAO();
-            Account accountBefore = DBA.getAccount(ID);
+            Account accountBefore = DBA.getAccountByRoomID(ID);
             Account accountAfter = new Account(accountBefore.getID(),accountBefore.getRoomID(), name, name, 0, createdAtD, updatedAtD);
             DBA.updateAccount(accountAfter);
         }
-        
+        // sửa tên phòng hiện tại trong hợp đồng
+        ContractDAO DBCon = new ContractDAO();
+        Contract contract = DBCon.getContractByRooIDAndStatus(ID, 1);
+//        Contract contractNew = new Contract(contract.getID(), contract.getRoomID(), contract.getCustomerIDRepresentative(), contract.getNote(), 1, name, contract.getStartAt(), contract.getEndAt(), createdAtD, updatedAtD);
+        DBCon.updateRoomNameContract(name, updatedAtD, contract.getID());
         response.sendRedirect("RoomManage");
     }
 

@@ -244,8 +244,11 @@
                                 Contract contract = DBCon.getContractByContractID(listCustomer.get(i).getContractID());
                                 if (contract != null) {
                                     Room room = DBRoom.getRoomByID(contract.getRoomID());
-                                    roomName = room.getName();
-                                    roomIDCurrent = room.getID();
+                                    if (room != null) {
+                                        roomName = room.getName();
+                                        roomIDCurrent = room.getID();
+                                    }
+
                                 }
 
                             %>
