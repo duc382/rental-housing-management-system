@@ -120,6 +120,7 @@
                     listAllCustomerJS[<%=i%>].push("<%=listCustomerAll.get(i).getContractID()%>");
                     <%}%>
                 </script>
+                <br>
                 <label><b>Người đại diện</b></label>
                 <div style="height: auto" >
                     <select id="myselect" class="form-control droplist" name="CustomerID" data-live-search="true" required="true"></select>
