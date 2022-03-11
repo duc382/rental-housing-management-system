@@ -150,11 +150,11 @@ public class RoomDAO extends BaseDAO {
         return(true);
     }
     // update status and quantityCurrent
-    public boolean updateStatusAndQuantityCurrent(String RoomID){
+    public boolean updateStatusAndQuantityCurrent(int RoomID){
         try {
             String sql = "update room set status = 0, quantitycurrent = 0 where ID = ?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, RoomID);
+            st.setInt(1, RoomID);
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);

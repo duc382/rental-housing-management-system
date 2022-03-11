@@ -69,13 +69,16 @@ public class CancelContractManageController extends HttpServlet {
         ZoneId defauZoneId = ZoneId.systemDefault();
         Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
         ContractDAO DBCon = new ContractDAO();
-        DBCon.cancelContractByID(ids, updatedAtD);
-        Contract contract = DBCon.getContractByContractID(Integer.parseInt(ids));
         // chuyển trạng thái phòng thành trống
+        Contract contract = DBCon.getContractByContractID(Integer.parseInt(ids));
         RoomDAO DBRoom = new RoomDAO();
         Room roomCurrent = DBRoom.getRoomByID(contract.getRoomID());
+        DBRoom.updateStatusAndQuantityCurrent(roomCurrent.getID());
+        // hủy hợp đồng (set lại roomID và status của hợp đồng)
+        DBCon.cancelContractByID(ids, updatedAtD);
+        
 //        Room roomAfter = new Room(roomCurrent.getID(), "", 0, 0, 0, 0, 0, "", updatedAtD, updatedAtD);
-        DBRoom.updateStatusAndQuantityCurrent(ids);
+        
         response.sendRedirect("ContractManage");
         
                 
