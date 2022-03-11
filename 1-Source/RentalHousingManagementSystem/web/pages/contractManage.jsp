@@ -41,7 +41,7 @@
                 $('#dtTableContract').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             });
-             const cancelFunction = (id) => {
+            const cancelFunction = (id) => {
                 if (confirm("Bấm ok để hủy hơp đồng đã chọn, cancel để hủy") == true) {
                     window.location.href = "CancelContractManage?id=" + id;
                 }
@@ -193,7 +193,13 @@
                     <td style="text-align: center"><%=representativeName%></td>
                     <td style="text-align: center"><%=listContract.get(i).getStartAt()%></td>
                     <td style="text-align: center"><%=listContract.get(i).getEndAt()%></td>
-                    <td style="text-align: center"><%=listContract.get(i).getStatus()%></td>
+                    <%
+                        if (listContract.get(i).getStatus() == 0) {
+                    %>
+                    <td style="text-align: center">Đã Hủy</td>
+                    <%}else{%>
+                    <td style="text-align: center">Hoạt Động</td>
+                    <%}%> 
                     <td style="text-align: center">
                         <button onclick="openFormEditContract(listAllCustomerJS, <%=listContract.get(i).getID()%>, new Date('<%=listContract.get(i).getStartAt()%>'), new Date('<%=listContract.get(i).getEndAt()%>'), listServicesOfContractJS[<%=i%>], '<%=listContract.get(i).getNote()%>', '<%=listContract.get(i).getRoomName()%>')">Sửa hợp đồng</button>
                         <button><a style="text-decoration: none; color: black" onclick="cancelFunction(<%=listContract.get(i).getID()%>)" href="#">Hủy hợp đồng</a></button>

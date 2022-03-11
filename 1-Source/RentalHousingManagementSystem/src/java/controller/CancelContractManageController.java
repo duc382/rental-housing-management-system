@@ -76,6 +76,7 @@ public class CancelContractManageController extends HttpServlet {
         Room roomCurrent = DBRoom.getRoomByID(contract.getRoomID());
 //        Room roomAfter = new Room(roomCurrent.getID(), "", 0, 0, 0, 0, 0, "", updatedAtD, updatedAtD);
         DBRoom.updateStatusAndQuantityCurrent(ids);
+        response.sendRedirect("ContractManage");
         
                 
     }
