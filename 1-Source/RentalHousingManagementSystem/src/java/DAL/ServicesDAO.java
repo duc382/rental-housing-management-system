@@ -31,10 +31,27 @@ public class ServicesDAO extends BaseDAO {
                 listServices.add(services);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
             return(null);
         }
         return(listServices);
+    }
+    public Services getServicesByID(int ID){
+        try {
+            String sql = "Select * from services where ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, ID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Services services = new  Services(rs.getInt("ID"), rs.getString("Name"), rs.getString("SupplierName"), 
+                rs.getDouble("OriginCost"), rs.getDouble("price"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                return (services);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return(null);
+        }
+        return null;
     }
     // insert services
     public boolean insertServices(Services service) {

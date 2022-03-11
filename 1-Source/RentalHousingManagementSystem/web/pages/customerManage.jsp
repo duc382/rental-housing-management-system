@@ -33,8 +33,12 @@
         <link rel="stylesheet" href="css/StyleCustomerManage.css">
         <script src="js/JSCustomerManage.js"></script>
         <script>
+//            $(document).ready(function () {
+//                $('#dtTableContract').DataTable();
+//                $('.dataTables_length').addClass('bs-select');
+//            });
             $(document).ready(function () {
-                $('#dtTableContract').DataTable();
+                $('#dtTableCustomer').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             });
             $(function () {
@@ -221,7 +225,7 @@
                 <div style="margin-bottom: 3px">
                     <button class="open-button" onclick="openFormAdd()">Thêm Người Thuê</button>    
                 </div>
-                <table id="dtTableContract" class="table table-hover table-striped table-bordered table-sm">
+                <table id="dtTableCustomer" class="table table-hover table-striped table-bordered table-sm">
                     <thead>
                         <tr>
                             <th class="th-sm">Tên Phòng</th>
@@ -246,18 +250,20 @@
                                 Contract contract = DBCon.getContractByRepresentative(listCustomer.get(i).getID());
                                 if (contract != null) {
                                     checkRepresentative = true;
-                                }
-
-                        %>
-                        <tr>
-                            <%                                String roomName = "";
-                                int roomIDCurrent = 0;
-                                contract = DBCon.getContractByContractID(listCustomer.get(i).getContractID());
-                                if (contract != null) {
                                     Room room = DBRoom.getRoomByID(contract.getRoomID());
                                     if (room == null) {
                                         continue;
                                     }
+                                }
+
+                        %>
+                        <tr>
+                            <%                                
+                                String roomName = "";
+                                int roomIDCurrent = 0;
+                                contract = DBCon.getContractByContractID(listCustomer.get(i).getContractID());
+                                if (contract != null) {
+                                    Room room = DBRoom.getRoomByID(contract.getRoomID());
                                     roomName = room.getName();
                                     roomIDCurrent = room.getID();
                                 }
@@ -294,5 +300,6 @@
                     </tbody>
                 </table>
             </div>
+        </div>
     </body>
 </html>

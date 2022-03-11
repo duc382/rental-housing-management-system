@@ -12,33 +12,46 @@ import java.util.Date;
  * @author coder
  */
 public class Transactions {
-    private int ID;
+    private int id;
     private int servicesID;
     private int contactID;
+    private double quantity;
     private double amount;
     private String note;
+    private Date paymentCycle;
     private Date createdAt;
     private Date updatedAt;
 
     public Transactions() {
     }
 
-    public Transactions(int ID, int servicesID, int contactID, double amount, String note, Date createdAt, Date updatedAt) {
-        this.ID = ID;
+
+    public Transactions(int id, int servicesID, int contactID, double quantity, double amount, String note, Date paymentCycle, Date createdAt, Date updatedAt) {
+        this.id = id;
         this.servicesID = servicesID;
         this.contactID = contactID;
+        this.quantity = quantity;
         this.amount = amount;
         this.note = note;
+        this.paymentCycle = paymentCycle;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
-    public int getID() {
-        return ID;
+    
+    public double getQuantity() {
+        return quantity;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getServicesID() {
@@ -73,6 +86,14 @@ public class Transactions {
         this.note = note;
     }
 
+    public Date getPaymentCycle() {
+        return paymentCycle;
+    }
+
+    public void setPaymentCycle(Date paymentCycle) {
+        this.paymentCycle = paymentCycle;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -88,5 +109,11 @@ public class Transactions {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-     
+
+    @Override
+    public String toString() {
+        return "Transactions{" + "id=" + id + ", servicesID=" + servicesID + ", contactID=" + contactID + ", quantity=" + quantity + ", amount=" + amount + ", note=" + note + ", paymentCycle=" + paymentCycle + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+    }
+    
+    
 }

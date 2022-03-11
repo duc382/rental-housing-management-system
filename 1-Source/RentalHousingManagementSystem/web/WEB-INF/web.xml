@@ -92,6 +92,10 @@
         <servlet-name>CancelContractManage</servlet-name>
         <servlet-class>controller.CancelContractManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AnalysticManage</servlet-name>
+        <servlet-class>controller.AnalysticManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>CancelContractManage</servlet-name>
         <url-pattern>/CancelContractManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnalysticManage</servlet-name>
+        <url-pattern>/AnalysticManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
