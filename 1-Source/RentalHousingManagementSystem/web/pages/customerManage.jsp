@@ -40,10 +40,15 @@
             $(function () {
                 $('.selectpicker').selectpicker();
             });
-            const deleteFunction = (id) => {
-                if (confirm("Bấm ok để xóa người thuê đã chọn, cancel để hủy") == true) {
-                    window.location.href = "DeleteCustomerManage?id=" + id;
+            const deleteFunction = (id, check) => {
+                if (check == false) {
+                    if (confirm("Bấm ok để xóa người thuê đã chọn, cancel để hủy") == true) {
+                        window.location.href = "DeleteCustomerManage?id=" + id;
+                    }
+                } else {
+                    alert("Không thể xóa người đại diện hợp đồng");
                 }
+
             }
             listCustomerJS = new Array();
         </script>
@@ -230,22 +235,28 @@
                     </thead>
                     <tbody>
                         <%
-                            int ContractID = 0;
+
                             for (int i = 0; i < listCustomer.size(); i++) {
+                                int ContractID = 0;
+                                boolean checkRepresentative = false;
                                 if (listCustomer.get(i).getContractID() != 0) {
                                     ContractID = listCustomer.get(i).getContractID();
 
                                 }
+                                Contract contract = DBCon.getContractByRepresentative(listCustomer.get(i).getID());
+                                if (contract != null) {
+                                    checkRepresentative = true;
+                                }
+
                         %>
                         <tr>
-                            <%
-                                String roomName = "";
+                            <%                                String roomName = "";
                                 int roomIDCurrent = 0;
-                                Contract contract = DBCon.getContractByContractID(listCustomer.get(i).getContractID());
+                                contract = DBCon.getContractByContractID(listCustomer.get(i).getContractID());
                                 if (contract != null) {
                                     Room room = DBRoom.getRoomByID(contract.getRoomID());
                                     if (room == null) {
-                                           continue;
+                                        continue;
                                     }
                                     roomName = room.getName();
                                     roomIDCurrent = room.getID();
@@ -276,7 +287,7 @@
                                 <button onclick="openFormEdit(listCustomerJS, <%=i%>)">Sửa thông tin</button>
                                 <button><a style="text-decoration: none; color: black" onclick="openFormChangeRoom('<%=roomName%>', <%=listCustomer.get(i).getID()%>, <%=roomIDCurrent%>)" href="#">Chuyển phòng</a></button>
                                 <button onclick="openFormView(listCustomerJS, <%=i%>)">Xem chi tiết</button>
-                                <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listCustomer.get(i).getID()%>)" href="#">Xóa</a></button>
+                                <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listCustomer.get(i).getID()%>, <%=checkRepresentative%>)" href="#">Xóa</a></button>
                             </td>
                         </tr>
                         <%}%>   

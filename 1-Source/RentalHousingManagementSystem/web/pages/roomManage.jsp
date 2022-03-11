@@ -30,10 +30,15 @@
         <link rel="stylesheet" href="css/StyleSidebar.css">
         <script src="js/JSRoomManage.js"></script>
         <script>
-            const deleteFunction = (id) => {
-                if (confirm("Bấm ok để xóa phòng đã chọn, cancel để hủy") == true) {
-                    window.location.href = "DeleteRoomManage?id=" + id;
+            const deleteFunction = (id, status) => {
+                if (status != 1) {
+                    if (confirm("Bấm ok để xóa phòng đã chọn, cancel để hủy") == true) {
+                        window.location.href = "DeleteRoomManage?id=" + id;
+                    }
+                } else{
+                    alert("Không thể xóa phòng đang còn hợp đồng");
                 }
+
             }
         </script>
     </head>
@@ -113,6 +118,7 @@
                     </script>
                     <%
                         for (int i = 0; i < listRoom.size(); i++) {%>
+
                     <tr>
                         <td class="roomName hired"><h5><%=listRoom.get(i).getName()%></h5></td>
                         <td style="text-align: center"><%=listRoom.get(i).getPrice()%></td>
@@ -132,7 +138,7 @@
                                 roomEdit[<%=i%>].push("<%=listRoom.get(i).getQuantityCurrent()%>");
                             </script>
                             <button onclick="openFormEdit(roomEdit, <%=i%>)">Sửa thông tin phòng</button>
-                            <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listRoom.get(i).getID()%>)" href="#">Xóa</a></button>
+                            <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listRoom.get(i).getID()%>, <%=listRoom.get(i).getStatus()%>)" href="#">Xóa</a></button>
                         </td>
                     </tr>
                     <%}%>   

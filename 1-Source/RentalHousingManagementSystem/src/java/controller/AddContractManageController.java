@@ -120,7 +120,7 @@ public class AddContractManageController extends HttpServlet {
         // thay doi trang thai cua phong
         RoomDAO DBR = new RoomDAO();
         DBR.updateStatus(roomID, 1);
-        DBR.updateSlot(roomID, -1);
+        DBR.updateSlotCurrent(roomID, -1);
         // lay thong tin hop dong 
         Contract contractNew = DBC.getContractByRooIDAndStatus(roomID, 1);
         // them ma hop dong cho nguoi thue

@@ -64,7 +64,7 @@ public class DeleteCustomerManageController extends HttpServlet {
 //        processRequest(request, response);
         int customerID = Integer.parseInt(request.getParameter("id"));
         CustomerDAO DBCus = new CustomerDAO();
-        // tang so luong nguoi trong phong
+        // giam so luong nguoi trong phong hiện tại
         Customer customer = DBCus.getCustomerByID(customerID);
         int contractID = customer.getContractID();
         if (contractID != 0){
@@ -72,7 +72,7 @@ public class DeleteCustomerManageController extends HttpServlet {
             Contract contract = DBCon.getContractByContractID(contractID);
             int roomID = contract.getRoomID();
             RoomDAO DBRoom = new RoomDAO();
-            DBRoom.updateSlot(roomID, -1);
+            DBRoom.updateSlotCurrent(roomID, 1);
         }
         // xoa nguoi khoi DB
         DBCus.deleteCustomer(customerID);

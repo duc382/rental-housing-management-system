@@ -26,8 +26,10 @@ public class RoomDAO extends BaseDAO {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
+                
+                int oke = rs.getInt("Status");
                 Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
-                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"), rs.getString("Utensil"),
+                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"),rs.getInt("Status"), rs.getString("Utensil"),
                 rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
                 listRoom.add(room);
             }
@@ -180,7 +182,7 @@ public class RoomDAO extends BaseDAO {
         return true;
     }
     // update slot in room quantitycurrent-k
-    public boolean updateSlot(int RoomID, int k){
+    public boolean updateSlotCurrent(int RoomID, int k){
         try {
             String sql = "update room set quantitycurrent = quantitycurrent-? where ID = ?";
             PreparedStatement st = connection.prepareStatement(sql);
