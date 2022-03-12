@@ -53,7 +53,8 @@
         <div>
             <div class="container mt-3" style="max-width: 76%; margin-left: 12%; margin-right: 12%;">
                 <div style="margin-bottom: 3px">
-                    <button class="open-button" onclick="openForm()">Thêm Hóa Đơn</button>    
+                    <a href="AddTransactionsManage"><button class="open-button" >Thêm Hóa Đơn</button>  </a>
+                      
                 </div>
                 <table id="dtTableAnalystic" class="table table-hover table-striped table-bordered table-sm">
                     <thead>

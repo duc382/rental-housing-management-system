@@ -96,6 +96,10 @@
         <servlet-name>AnalysticManage</servlet-name>
         <servlet-class>controller.AnalysticManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddTransactionsManage</servlet-name>
+        <servlet-class>controller.AddTransactionsManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>AnalysticManage</servlet-name>
         <url-pattern>/AnalysticManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTransactionsManage</servlet-name>
+        <url-pattern>/AddTransactionsManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

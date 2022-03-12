@@ -39,6 +39,25 @@ public class ContractDAO extends BaseDAO {
         }
         return (listContract);
     }
+    // get all contract status = 1
+    public ArrayList<Contract> getAllContractOn() {
+        ArrayList<Contract> listContract = new ArrayList<>();
+        try {
+            String sql = "Select * from Contract where status = 1";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Contract contract = new Contract(rs.getInt("ID"), rs.getInt("RoomID"), rs.getInt("CustomerIDRepresentative"),
+                        rs.getString("Note"), rs.getInt("status"), rs.getString("RoomName"),
+                        rs.getDate("StartAt"), rs.getDate("EndAt"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                listContract.add(contract);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return (null);
+        }
+        return (listContract);
+    }
         // get ContractID
     public Contract getContractByContractID(int ID) {
         try {

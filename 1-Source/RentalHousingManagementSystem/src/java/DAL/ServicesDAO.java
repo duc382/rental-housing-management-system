@@ -53,6 +53,25 @@ public class ServicesDAO extends BaseDAO {
         }
         return null;
     }
+    public ArrayList<Services> getServicesOfContract(String ContractID){
+        
+        ArrayList<Services> listServices = new ArrayList<>();
+        try {
+            String sql = "select S.* from Contract as C join ServicesOfContract as SOC on c.ID = SOC.ContractID join Services as S on SOC.ServicesID = s.ID where c.ID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ContractID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Services services = new  Services(rs.getInt("ID"), rs.getString("Name"), rs.getString("SupplierName"), 
+                rs.getDouble("OriginCost"), rs.getDouble("price"), rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                listServices.add(services);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return(null);
+        }
+        return listServices;
+    }
     // insert services
     public boolean insertServices(Services service) {
         try {
@@ -104,5 +123,10 @@ public class ServicesDAO extends BaseDAO {
     @Override
     public ArrayList getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public static void main(String[] args) {
+        ServicesDAO DBSer = new ServicesDAO();
+         ArrayList<Services> listServices = DBSer.getServicesOfContract("11");
+         System.out.println(listServices);
     }
 }

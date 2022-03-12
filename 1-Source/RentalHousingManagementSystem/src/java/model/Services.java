@@ -97,5 +97,10 @@ public class Services {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @Override
+    public String toString() {
+        return "Services{" + "ID=" + ID + ", name=" + name + ", supplierName=" + supplierName + ", originCost=" + originCost + ", price=" + price + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+    }
     
 }

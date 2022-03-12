@@ -96,6 +96,24 @@ public class RoomDAO extends BaseDAO {
         }
         return(listRoom);
     }
+    // get room đang hoạt động
+    public ArrayList<Room> getRoomUnEmpty(){
+        ArrayList<Room> listRoom = new ArrayList<>();
+        try {
+            String sql = "Select * from room where status = 1";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Room room = new  Room(rs.getInt("ID"), rs.getString("Name"), rs.getInt("price"),
+                rs.getDouble("area"), rs.getInt("quantityMax"), rs.getInt("QuantityCurrent"), rs.getString("Utensil"),
+                rs.getDate("CreatedAt"), rs.getDate("UpdatedAt"));
+                listRoom.add(room);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return(listRoom);
+    }
     // get room còn dư slot
     public ArrayList<Room> getRoomRedundantSlot(){
         ArrayList<Room> listRoom = new ArrayList<>();
