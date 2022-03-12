@@ -203,6 +203,7 @@
                     <td style="text-align: center">
                         <button onclick="openFormEditContract(listAllCustomerJS, <%=listContract.get(i).getID()%>, new Date('<%=listContract.get(i).getStartAt()%>'), new Date('<%=listContract.get(i).getEndAt()%>'), listServicesOfContractJS[<%=i%>], '<%=listContract.get(i).getNote()%>', '<%=listContract.get(i).getRoomName()%>')">Sửa hợp đồng</button>
                         <button><a style="text-decoration: none; color: black" onclick="cancelFunction(<%=listContract.get(i).getID()%>)" href="#">Hủy hợp đồng</a></button>
+                        <a target="_blank" style="text-decoration: none; color: black" href="ViewContractManage?id=<%=listContract.get(i).getID()%>"><button>Xem chi tiết</button></a>
                     </td>
                 </tr>
                 <%}%>   

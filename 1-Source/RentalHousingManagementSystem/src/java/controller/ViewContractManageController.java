@@ -5,18 +5,25 @@
  */
 package controller;
 
+import DAL.ContractDAO;
+import DAL.CustomerDAO;
+import DAL.TransactionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Contract;
+import model.Customer;
+import model.Transactions;
 
 /**
  *
  * @author coder
  */
-public class HomeCustomerController extends HttpServlet {
+public class ViewContractManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +42,10 @@ public class HomeCustomerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeCustomerController</title>");            
+            out.println("<title>Servlet ViewContractManageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeCustomerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewContractManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +63,20 @@ public class HomeCustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        ContractDAO DBCon = new ContractDAO();
+        Contract contract = DBCon.getContractByContractID(id);
+        request.setAttribute("contract", contract);
+        CustomerDAO DBCus = new CustomerDAO();
+        Customer customerRepresentative = DBCus.getCustomerByID(contract.getCustomerIDRepresentative());
+        request.setAttribute("customerRepresentative", customerRepresentative);
+        ArrayList<Customer> listCustomerNoneRepresentative = DBCus.getCustomerInContractNoneRepresentative(contract.getID(), contract.getCustomerIDRepresentative());
+        request.setAttribute("listCustomer", listCustomerNoneRepresentative);
+        TransactionDAO DBTrans = new TransactionDAO();
+        ArrayList<Transactions> listTrans = DBTrans.getAllTransactionInContract(contract.getID());
+        request.setAttribute("listTransactions", listTrans);
+        request.getRequestDispatcher("/pages/viewContractManage.jsp").forward(request, response);
     }
 
     /**

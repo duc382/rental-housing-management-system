@@ -17,8 +17,8 @@
         <servlet-class>controller.HomeManageController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeCustomer</servlet-name>
-        <servlet-class>controller.HomeCustomerController</servlet-class>
+        <servlet-name>HomeGuest</servlet-name>
+        <servlet-class>controller.HomeGuestController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RoomManage</servlet-name>
@@ -108,6 +108,10 @@
         <servlet-name>DeleteTransactionsManage</servlet-name>
         <servlet-class>controller.DeleteTransactionsManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewContractManage</servlet-name>
+        <servlet-class>controller.ViewContractManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -117,8 +121,8 @@
         <url-pattern>/HomeManage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeCustomer</servlet-name>
-        <url-pattern>/HomeCustomer</url-pattern>
+        <servlet-name>HomeGuest</servlet-name>
+        <url-pattern>/HomeGuest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RoomManage</servlet-name>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>DeleteTransactionsManage</servlet-name>
         <url-pattern>/DeleteTransactionsManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewContractManage</servlet-name>
+        <url-pattern>/ViewContractManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

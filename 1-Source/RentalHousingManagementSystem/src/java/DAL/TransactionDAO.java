@@ -54,6 +54,24 @@ public class TransactionDAO extends BaseDAO{
         }
         return null;
     }
+    public ArrayList<Transactions> getAllTransactionInContract(int contractID) {
+        ArrayList<Transactions> listTrans = new ArrayList<>();
+        try {
+            String sql = "select * from Transactions where contractID=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, contractID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transactions transactions = new Transactions(rs.getInt("ID"), rs.getInt("ServicesID"), rs.getInt("ContractID"), rs.getDouble("Price"),
+                        rs.getDouble("Quantity"),rs.getDouble("Amount"), rs.getString("note"),rs.getString("PaymentCycle"),rs.getDate("createdAt"), rs.getDate("updatedAt"));
+                listTrans.add(transactions);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return listTrans;
+    }
     public void inserTransactions(Transactions trans){
         try {
             String sql = "insert into Transactions(ServicesID,ContractID,Price,quantity,Amount,Note,PaymentCycle,CreatedAt,UpdatedAt) values(?,?,?,?,?,?,?,?,?)";
@@ -105,7 +123,7 @@ public class TransactionDAO extends BaseDAO{
     }
     public static void main(String[] args) {
         TransactionDAO DBTran = new TransactionDAO();
-        ArrayList<Transactions> listTrans = DBTran.getAllTransaction();
+        ArrayList<Transactions> listTrans = DBTran.getAllTransactionInContract(0);
         System.out.println(listTrans);
     }
 }
