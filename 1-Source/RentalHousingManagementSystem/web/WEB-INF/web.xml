@@ -112,6 +112,18 @@
         <servlet-name>ViewContractManage</servlet-name>
         <servlet-class>controller.ViewContractManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountManage</servlet-name>
+        <servlet-class>controller.AccountManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAccountManage</servlet-name>
+        <servlet-class>controller.EditAccountManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAccountManage</servlet-name>
+        <servlet-class>controller.AddAccountManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -215,6 +227,18 @@
     <servlet-mapping>
         <servlet-name>ViewContractManage</servlet-name>
         <url-pattern>/ViewContractManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountManage</servlet-name>
+        <url-pattern>/AccountManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAccountManage</servlet-name>
+        <url-pattern>/EditAccountManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAccountManage</servlet-name>
+        <url-pattern>/AddAccountManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

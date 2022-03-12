@@ -57,7 +57,11 @@ function openFormEdit(listCustomerJS, position) {
 function closeFormEdit() {
     document.getElementById("myFormEdit").style.display = "none";
 }
-function openFormChangeRoom(roomName, ID, roomIDCurrent) {
+function openFormChangeRoom(roomName, ID, roomIDCurrent, checkRepresentative) {
+    if (checkRepresentative == true){
+        alert("Không thể chuyển phòng người đại diện hợp đồng");
+        return;
+    }
 //    document.getElementById("IDEdit").value = ServicesEdit[position][0];
     if (roomName != null){
         document.getElementById("roomNameCurrent").value= roomName;

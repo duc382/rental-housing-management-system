@@ -291,7 +291,7 @@
                                     listCustomerJS[<%=i%>].push("<%=listCustomer.get(i).getID()%>");
                                 </script>
                                 <button onclick="openFormEdit(listCustomerJS, <%=i%>)">Sửa thông tin</button>
-                                <button><a style="text-decoration: none; color: black" onclick="openFormChangeRoom('<%=roomName%>', <%=listCustomer.get(i).getID()%>, <%=roomIDCurrent%>)" href="#">Chuyển phòng</a></button>
+                                <button><a style="text-decoration: none; color: black" onclick="openFormChangeRoom('<%=roomName%>', <%=listCustomer.get(i).getID()%>, <%=roomIDCurrent%>, <%=checkRepresentative%>)" href="#">Chuyển phòng</a></button>
                                 <button onclick="openFormView(listCustomerJS, <%=i%>)">Xem chi tiết</button>
                                 <button><a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listCustomer.get(i).getID()%>, <%=checkRepresentative%>)" href="#">Xóa</a></button>
                             </td>

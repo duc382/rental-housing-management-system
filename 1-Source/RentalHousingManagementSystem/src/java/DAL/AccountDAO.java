@@ -18,7 +18,24 @@ import model.Account;
  * @author coder
  */
 public class AccountDAO extends BaseDAO {
-
+    //get all account
+    public ArrayList<Account> getAllAccount(){
+        ArrayList<Account> listAccount = new ArrayList<>();
+        try {
+            String sql = "Select * from account";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Account a = new Account(rs.getInt("ID"), rs.getInt("RoomID"), rs.getString("username"),
+                        rs.getString("password"), rs.getInt("role"), rs.getDate("createdAt"), rs.getDate("updatedAt"));
+                listAccount.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return listAccount;
+    }
     // get account by user and pass
     public Account getAccount(String userName, String password) {
         try {
@@ -73,7 +90,23 @@ public class AccountDAO extends BaseDAO {
         }
         return true;
     }
-    
+    // insert account
+    public boolean insertAccountAdmin(Account account) {
+        try {
+            String sql = "insert into Account(Username,Password,role,CreatedAt,UpdatedAt) values(?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, account.getUsername());
+            st.setString(2, account.getPassword());
+            st.setInt(3, account.getRole());
+            st.setDate(4, new java.sql.Date(account.getCreatedAt().getTime()));
+            st.setDate(5, new java.sql.Date(account.getUpdatedAt().getTime()));
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
     // update account
     public boolean  updateAccount(Account account){
         try {
@@ -82,7 +115,7 @@ public class AccountDAO extends BaseDAO {
             st.setString(1, account.getUsername());
             st.setString(2, account.getPassword());
             st.setDate(3, new java.sql.Date(account.getUpdatedAt().getTime()));
-            st.setInt(4, account.getID());
+            st.setInt(4, account.getId());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,5 +138,10 @@ public class AccountDAO extends BaseDAO {
     @Override
     public ArrayList getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public static void main(String[] args) {
+        AccountDAO DBAcc = new AccountDAO();
+        ArrayList<Account> listAccount = DBAcc.getAllAccount();
+        System.out.println(listAccount);
     }
 }

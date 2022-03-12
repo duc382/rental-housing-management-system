@@ -6,8 +6,6 @@
 package controller;
 
 import DAL.AccountDAO;
-import DAL.ContractDAO;
-import DAL.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -18,14 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
-import model.Contract;
-import model.Room;
 
 /**
  *
  * @author coder
  */
-public class EditRoomManageController extends HttpServlet {
+public class AddAccountManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +40,10 @@ public class EditRoomManageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditRoomManageController</title>");            
+            out.println("<title>Servlet AddAccountManageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditRoomManageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddAccountManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,55 +75,17 @@ public class EditRoomManageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        String name = "";
-        int ID = 0;
-        int price = -1;
-        double area = -1;
-        int quantityMax = -1;
-        String utensil = "";
-        if (request.getParameter("ID") != null) {
-            ID = Integer.parseInt(request.getParameter("ID"));
-        }
-        if (request.getParameter("name") != null) {
-            name = request.getParameter("name");
-        }
-        if (request.getParameter("price") != null) {
-            price = Integer.parseInt(request.getParameter("price"));
-        }
-        if (request.getParameter("area") != null) {
-            area = Double.parseDouble(request.getParameter("area"));
-        }
-        if (request.getParameter("quantityMax") != null) {
-            quantityMax = Integer.parseInt(request.getParameter("quantityMax"));
-        }
-        if (request.getParameter("utensil") != null) {
-            utensil = request.getParameter("utensil");
-        }
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         LocalDate createdAt = LocalDate.now();
         LocalDate updatedAt = LocalDate.now();
         ZoneId defauZoneId = ZoneId.systemDefault();
         Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
         Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
-        Room roomAfter = new Room(ID, name, price, area, quantityMax, utensil, createdAtD, updatedAtD);
-        RoomDAO DBR = new RoomDAO();
-        Room roomBefore = DBR.getRoomByID(ID);
-        DBR.updateRoom(roomAfter);
-        // sửa tên và pass của account nếu tên phòng bị thay đổi
-        if (!roomBefore.getName().equalsIgnoreCase(roomAfter.getName())){
-            AccountDAO DBA= new AccountDAO();
-            Account accountBefore = DBA.getAccountByRoomID(ID);
-            Account accountAfter = new Account(accountBefore.getId(),accountBefore.getRoomID(), name, name, 0, createdAtD, updatedAtD);
-            DBA.updateAccount(accountAfter);
-        }
-        // sửa tên phòng hiện tại trong hợp đồng
-        ContractDAO DBCon = new ContractDAO();
-        Contract contract = DBCon.getContractByRooIDAndStatus(ID, 1);
-//        Contract contractNew = new Contract(contract.getID(), contract.getRoomID(), contract.getCustomerIDRepresentative(), contract.getNote(), 1, name, contract.getStartAt(), contract.getEndAt(), createdAtD, updatedAtD);
-        DBCon.updateRoomNameContract(name, updatedAtD, contract.getID());
-        response.sendRedirect("RoomManage");
+        Account account = new Account(0, username, password, 1, createdAtD, updatedAtD);
+        AccountDAO DBA = new AccountDAO();
+        DBA.insertAccountAdmin(account);
+        response.sendRedirect("AccountManage");
     }
 
     /**
