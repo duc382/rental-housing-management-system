@@ -91,8 +91,8 @@
                             <td style="text-align: center"><%=listTrans.get(i).getPaymentCycle()%></td>
                             <td style="text-align: center"><%=listTrans.get(i).getNote()%></td>
                             <td style="text-align: center">
-                                <a href="EditTransactionsManage?id=<%=listTrans.get(i).getId()%>" target="_blank"><button>Sửa</button></a>
-                                <a onclick="deleteFunction(<%=listTrans.get(i).getId()%>)"><button>Xóa</button></a>
+                                <a style="text-decoration: none; color: black" href="EditTransactionsManage?id=<%=listTrans.get(i).getId()%>" target="_blank"><button>Sửa</button></a>
+                                <a style="text-decoration: none; color: black" onclick="deleteFunction(<%=listTrans.get(i).getId()%>)"><button>Xóa</button></a>
                             </td>
                         </tr>
                         <%}%>
