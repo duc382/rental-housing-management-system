@@ -40,6 +40,12 @@
                 $('#dtTableAnalystic').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             });
+            const deleteFunction = (id) => {
+                if (confirm("Bấm ok để xóa hóa đơn đã chọn, cancel để hủy") == true) {
+                    window.location.href = "DeleteTransactionsManage?id=" + id;
+                }
+
+            }
         </script>
     </head>
     <body>
@@ -53,8 +59,8 @@
         <div>
             <div class="container mt-3" style="max-width: 76%; margin-left: 12%; margin-right: 12%;">
                 <div style="margin-bottom: 3px">
-                    <a href="AddTransactionsManage"><button class="open-button" >Thêm Hóa Đơn</button>  </a>
-                      
+                    <a href="AddTransactionsManage" target="_blank"><button class="open-button" >Thêm Hóa Đơn</button>  </a>
+
                 </div>
                 <table id="dtTableAnalystic" class="table table-hover table-striped table-bordered table-sm">
                     <thead>
@@ -63,8 +69,10 @@
                             <th class="th-sm" style="text-align: center">Tên Dịch Vụ</th>
                             <th class="th-sm" style="text-align: center">Giá/Số Lượng</th>
                             <th class="th-sm" style="text-align: center">Số Lượng</th>
-                            <th style="text-align: center">Tổng</th>
+                            <th class="th-sm" style="text-align: center">Tổng</th>
                             <th class="th-sm" style="text-align: center">Chu Kỳ</th>
+                            <th class="th-sm" style="text-align: center">Ghi Chú</th>
+                            <th class="th-sm" style="text-align: center">Chức Năng</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,13 +83,17 @@
                                 services = DBSer.getServicesByID(listTrans.get(i).getServicesID());
                         %>
                         <tr>
-                            <td><%=contract.getRoomName()%></td>
-                            <td><%=services.getName()%></td>
-                            <td><%=services.getPrice()%></td>
-                            <td><%=listTrans.get(i).getQuantity()%></td>
-                            <td><%=services.getPrice() * listTrans.get(i).getQuantity()%></td>
-                            <td><%=listTrans.get(i).getPaymentCycle()%></td>
-
+                            <td style="text-align: center"><%=contract.getRoomName()%></td>
+                            <td style="text-align: center"><%=services.getName()%></td>
+                            <td style="text-align: center"><%=listTrans.get(i).getPrice()%></td>
+                            <td style="text-align: center"><%=listTrans.get(i).getQuantity()%></td>
+                            <td style="text-align: center"><%=listTrans.get(i).getAmount()%></td>
+                            <td style="text-align: center"><%=listTrans.get(i).getPaymentCycle()%></td>
+                            <td style="text-align: center"><%=listTrans.get(i).getNote()%></td>
+                            <td style="text-align: center">
+                                <a href="EditTransactionsManage?id=<%=listTrans.get(i).getId()%>" target="_blank"><button>Sửa</button></a>
+                                <a onclick="deleteFunction(<%=listTrans.get(i).getId()%>)"><button>Xóa</button></a>
+                            </td>
                         </tr>
                         <%}%>
                     </tbody>

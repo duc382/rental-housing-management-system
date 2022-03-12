@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function validateSelectBoxRoom(obj,listServices,listSerOfCon) {
+function validateSelectBoxRoom(obj, listServices, listSerOfCon) {
     $("#selectServices").selectpicker('val', '');
     $("#selectServices").find('option').remove();
     $("#selectServices").selectpicker("refresh");
@@ -15,16 +15,16 @@ function validateSelectBoxRoom(obj,listServices,listSerOfCon) {
         }
     }
     var arr = new Array();
-    for (var i = 0; i < listServices.length; i++){
-        for (var j = 0; j < listSerOfCon.length; j++){
-            if(listServices[i].id == listSerOfCon[j].servicesID && listSerOfCon[j].contractID == ContractID){
+    for (var i = 0; i < listServices.length; i++) {
+        for (var j = 0; j < listSerOfCon.length; j++) {
+            if (listServices[i].id == listSerOfCon[j].servicesID && listSerOfCon[j].contractID == ContractID) {
                 arr.push(listServices[i].id);
             }
         }
     }
-    for (var i = 0; i < listServices.length; i++){
-        for (var j = 0; j < arr.length; j++){
-            if (listServices[i].id == arr[j]){
+    for (var i = 0; i < listServices.length; i++) {
+        for (var j = 0; j < arr.length; j++) {
+            if (listServices[i].id == arr[j]) {
                 var option = "<option data-tokens=" + listServices[i].name + " value=" + listServices[i].id + ">" + listServices[i].name + "</option>";
                 $("#selectServices").append(option);
             }
@@ -32,7 +32,7 @@ function validateSelectBoxRoom(obj,listServices,listSerOfCon) {
     }
     $("#selectServices").selectpicker("refresh");
 }
-function validateSelectBoxServices(obj,listServices) {
+function validateSelectBoxServices(obj, listServices) {
     var options = obj.children;
     var ServicesID = 1;
     for (var i = 0; i < options.length; i++) {
@@ -40,16 +40,24 @@ function validateSelectBoxServices(obj,listServices) {
             ServicesID = options[i].value;
         }
     }
-    for (var i = 0; listServices.length; i++){
-        if (listServices[i].id == ServicesID){
+    for (var i = 0; listServices.length; i++) {
+        if (listServices[i].id == ServicesID) {
             document.getElementById("price").value = listServices[i].price;
+            quantity = document.getElementById("quantity").value;
+            amount = listServices[i].price * quantity;
+            document.getElementById("amount").value = amount;
         }
     }
-    
+
 }
 function validateInputQuantity(quantity) {
     price = document.getElementById("price").value;
-    amount = price*quantity;
+    amount = price * quantity;
+    document.getElementById("amount").value = amount;
+}
+function validateInputPrice(price) {
+    quantity = document.getElementById("quantity").value;
+    amount = price * quantity;
     document.getElementById("amount").value = amount;
 }
 

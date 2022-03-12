@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAL.ContractDAO;
 import DAL.TransactionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,13 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transaction;
+import model.Contract;
 import model.Transactions;
 
 /**
  *
  * @author coder
  */
-public class AddTransactionsManageController extends HttpServlet {
+public class EditTransactionsManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +43,10 @@ public class AddTransactionsManageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddTransactionsManageController</title>");
+            out.println("<title>Servlet EditTransactionsManageController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddTransactionsManageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditTransactionsManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,8 +65,12 @@ public class AddTransactionsManageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        request.getRequestDispatcher("/pages/addTransactionsManage.jsp").forward(request, response);
-//        response.sendRedirect("/pages/addTransactionsManage.jsp");
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        TransactionDAO DBTrans = new TransactionDAO();
+        Transactions trans = DBTrans.getTransactionByID(id);
+        request.setAttribute("transactions", trans);
+        request.getRequestDispatcher("/pages/editTransactionsManage.jsp").forward(request, response);
     }
 
     /**
@@ -78,11 +84,12 @@ public class AddTransactionsManageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+//        processRequest(request, response);
+
+        int id = Integer.parseInt(request.getParameter("id"));
         String paymentCycle = request.getParameter("paymentCycle");
-        int contractID = Integer.parseInt(request.getParameter("contractID"));
         int servicesID = Integer.parseInt(request.getParameter("servicesID"));
         double price = Double.parseDouble(request.getParameter("price"));
         double quantity = Double.parseDouble(request.getParameter("quantity"));
@@ -93,11 +100,11 @@ public class AddTransactionsManageController extends HttpServlet {
         ZoneId defauZoneId = ZoneId.systemDefault();
         Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
         Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
-        Transactions transactions = new Transactions(servicesID, contractID,price, quantity, amount, note, paymentCycle, createdAtD, updatedAtD);
+        //        Transactions transactions = new Transactions(servicesID, contractID, quantity, amount, note, paymentCycle, createdAtD, updatedAtD);
         TransactionDAO DBTran = new TransactionDAO();
-        DBTran.inserTransactions(transactions);
+        Transactions transactions = new Transactions(id, servicesID, 0,price, quantity, amount, note, paymentCycle, createdAtD, updatedAtD);
+        DBTran.updateTransactions(transactions);
         response.sendRedirect("AnalysticManage");
-
     }
 
     /**

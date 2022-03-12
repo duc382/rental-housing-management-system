@@ -41,7 +41,7 @@ function validateForm(list) {
     try {
         priceF = parseFloat(price);
         if (priceF == price) {
-            if (priceF <= 0 || priceF < OriginCostF) {
+            if (priceF < 0 || priceF < OriginCostF) {
                 throw ""
             }
         } else {
@@ -103,7 +103,7 @@ function validateFormEdit(list) {
     try {
         priceF = parseFloat(price);
         if (priceF == price) {
-            if (priceF <= 0 || priceF < OriginCostF) {
+            if (priceF < 0 || priceF < OriginCostF) {
                 throw "error < 0"
                 console.log("1");
             }

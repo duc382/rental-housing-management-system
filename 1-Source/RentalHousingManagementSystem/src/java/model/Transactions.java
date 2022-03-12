@@ -15,21 +15,21 @@ public class Transactions {
     private int id;
     private int servicesID;
     private int contactID;
+    private double price;
     private double quantity;
     private double amount;
     private String note;
-    private Date paymentCycle;
+    private String paymentCycle;
     private Date createdAt;
     private Date updatedAt;
 
     public Transactions() {
     }
 
-
-    public Transactions(int id, int servicesID, int contactID, double quantity, double amount, String note, Date paymentCycle, Date createdAt, Date updatedAt) {
-        this.id = id;
+    public Transactions(int servicesID, int contactID, double price, double quantity, double amount, String note, String paymentCycle, Date createdAt, Date updatedAt) {
         this.servicesID = servicesID;
         this.contactID = contactID;
+        this.price = price;
         this.quantity = quantity;
         this.amount = amount;
         this.note = note;
@@ -37,6 +37,30 @@ public class Transactions {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public Transactions(int id, int servicesID, int contactID, double price, double quantity, double amount, String note, String paymentCycle, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.servicesID = servicesID;
+        this.contactID = contactID;
+        this.price = price;
+        this.quantity = quantity;
+        this.amount = amount;
+        this.note = note;
+        this.paymentCycle = paymentCycle;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+
+    
     
     public double getQuantity() {
         return quantity;
@@ -86,11 +110,11 @@ public class Transactions {
         this.note = note;
     }
 
-    public Date getPaymentCycle() {
+    public String getPaymentCycle() {
         return paymentCycle;
     }
 
-    public void setPaymentCycle(Date paymentCycle) {
+    public void setPaymentCycle(String paymentCycle) {
         this.paymentCycle = paymentCycle;
     }
 

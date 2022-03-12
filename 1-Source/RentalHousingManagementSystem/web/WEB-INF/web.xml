@@ -100,6 +100,14 @@
         <servlet-name>AddTransactionsManage</servlet-name>
         <servlet-class>controller.AddTransactionsManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditTransactionsManage</servlet-name>
+        <servlet-class>controller.EditTransactionsManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTransactionsManage</servlet-name>
+        <servlet-class>controller.DeleteTransactionsManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -191,6 +199,14 @@
     <servlet-mapping>
         <servlet-name>AddTransactionsManage</servlet-name>
         <url-pattern>/AddTransactionsManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditTransactionsManage</servlet-name>
+        <url-pattern>/EditTransactionsManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTransactionsManage</servlet-name>
+        <url-pattern>/DeleteTransactionsManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

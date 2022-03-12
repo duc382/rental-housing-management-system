@@ -63,12 +63,10 @@
         <div style="width: 15%;margin-left: auto;margin-right: auto;">
             <form class="form-container"  action="AddTransactionsManage" method="POST">
                 <h1>Thêm Hóa Đơn</h1>
-                <label><b>Chu Kỳ:</b></label>
-                <br>
-                <input type="month" name="PaymentCycle" value="" required/>
-                <br>
+                <label><b>Chu Kỳ:</b></label><br>
+                <input type="month" name="paymentCycle" value="" required/><br>
                 <label><b>Phòng:</b></label> 
-                <select required="" onchange="validateSelectBoxRoom(this, listServicesJS, listSerOfConJS)" class="form-control selectpicker droplist" name="ContractID" data-live-search="true">
+                <select required="" onchange="validateSelectBoxRoom(this, listServicesJS, listSerOfConJS)" class="form-control selectpicker droplist" name="contractID" data-live-search="true">
                     <%                    ArrayList<Contract> listContract = DBCon.getAllContractOn();
                         for (int i = 0; i < listContract.size(); i++) {%>
                     <option data-tokens="<%=listContract.get(i).getRoomName()%>" value="<%=listContract.get(i).getID()%>"><%=listContract.get(i).getRoomName()%></option>
@@ -76,24 +74,18 @@
                 </select>
                 <br>
                 <label><b>Dịch Vụ:</b></label>
-                <select required="" onchange="validateSelectBoxServices(this, listServicesJS)"  id="selectServices" class="form-control selectpicker droplist" name="ServicesID" data-live-search="true" >
+                <select required="" onchange="validateSelectBoxServices(this, listServicesJS)"  id="selectServices" class="form-control selectpicker droplist" name="servicesID" data-live-search="true" >
                     <%
-
                         for (int i = 0; i < listServices.size(); i++) {%>
-                    <option data-tokens="<%=listServices.get(i).getName()%>" value="<%=listServices.get(i).getID()%>" style="display: none"><%=listServices.get(i).getName()%></option>
                     <%}%> 
                 </select>
-                <label><b>Giá:</b></label>
-                <br>
-                <input type="text" id="price" name="price" value="">
-                <label><b>Số Lượng:</b></label>
-                <br>
+                <label><b>Giá:</b></label><br>
+                <input onchange="validateInputPrice(this.value)" type="text" id="price" name="price" value="">
+                <label><b>Số Lượng:</b></label><br>
                 <input required="" onchange="validateInputQuantity(this.value)" type="text" id="quantity" name="quantity" value="">
-                <label><b>Tổng:</b></label>
-                <br>
+                <label><b>Tổng:</b></label><br>
                 <input type="text" id="amount" name="amount" value="">
-                <label><b>Note:</b></label>
-                <br>
+                <label><b>Note:</b></label><br>
                 <textarea  name="note" style="width: 100%; height: 100px"></textarea>
                 <input type="submit" class="btn" value="Thêm"/>
             </form>
