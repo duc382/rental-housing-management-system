@@ -12,10 +12,10 @@ import java.util.Date;
  * @author coder
  */
 public class Request {
-    private int ID;
-    private int AccountID;
+    private int id;
+    private int accountID;
     private String content;
-    private boolean status;
+    private int status;
     private String note;
     private Date createdAt;
     private Date updatedAt;
@@ -23,9 +23,9 @@ public class Request {
     public Request() {
     }
 
-    public Request(int ID, int AccountID, String content, boolean status, String note, Date createdAt, Date updatedAt) {
-        this.ID = ID;
-        this.AccountID = AccountID;
+    public Request(int ID, int AccountID, String content, int status, String note, Date createdAt, Date updatedAt) {
+        this.id = ID;
+        this.accountID = AccountID;
         this.content = content;
         this.status = status;
         this.note = note;
@@ -33,22 +33,32 @@ public class Request {
         this.updatedAt = updatedAt;
     }
 
-    public int getID() {
-        return ID;
+    public Request(int AccountID, String content, int status, String note, Date createdAt, Date updatedAt) {
+        this.accountID = AccountID;
+        this.content = content;
+        this.status = status;
+        this.note = note;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAccountID() {
-        return AccountID;
+        return accountID;
     }
 
-    public void setAccountID(int AccountID) {
-        this.AccountID = AccountID;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
-
+    
+    
     public String getContent() {
         return content;
     }
@@ -57,11 +67,11 @@ public class Request {
         this.content = content;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

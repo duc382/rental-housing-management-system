@@ -128,6 +128,22 @@
         <servlet-name>EditAccountGuest</servlet-name>
         <servlet-class>controller.EditAccountGuestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RequestGuest</servlet-name>
+        <servlet-class>controller.RequestGuestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRequestGuest</servlet-name>
+        <servlet-class>controller.AddRequestGuestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRequestGuest</servlet-name>
+        <servlet-class>controller.DeleteRequestGuestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditRequestGuest</servlet-name>
+        <servlet-class>controller.EditRequestGuestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -247,6 +263,22 @@
     <servlet-mapping>
         <servlet-name>EditAccountGuest</servlet-name>
         <url-pattern>/EditAccountGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestGuest</servlet-name>
+        <url-pattern>/RequestGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRequestGuest</servlet-name>
+        <url-pattern>/AddRequestGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRequestGuest</servlet-name>
+        <url-pattern>/DeleteRequestGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditRequestGuest</servlet-name>
+        <url-pattern>/EditRequestGuest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

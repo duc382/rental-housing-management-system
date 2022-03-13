@@ -26,7 +26,7 @@
                 <li><a href="ServicesManage">Quản Lý Dịch Vụ</a></li>
                 <li><a href="ContractManage">Quản Lý Hợp Đồng</a></li>
                 <li><a href="CustomerManage">Quản Lý Người Thuê</a></li>
-                <li><a href="AnalysticManage">Thống Kê Thu Chi</a></li>
+                <li><a href="AnalysticManage">Quản Lý Hóa Đơn</a></li>
                 <li><a href="AccountManage">Quản Lý Tài Khoản</a></li>
                 <li><a href="Logout">Đăng Xuất</a></li>
             </ul>

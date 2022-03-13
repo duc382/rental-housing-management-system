@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%--<%@include file="sideBarAndHeader.html"%>--%>
         <%@include file="sidebarAndHeader.jsp"%>
+        
     </body>
 </html>
