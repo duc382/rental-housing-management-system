@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Quản Lý Yêu Cầu</title>
         <!--bs-->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -82,9 +82,6 @@
         <!--bảng request-->
         <div>
             <div class="container mt-3" style="max-width: 76%; margin-left: 12%; margin-right: 12%;">
-                <div style="margin-bottom: 3px">
-                    <button class="open-button" onclick="openFormAdd()">Tạo Yêu Cầu</button>    
-                </div>
                 <table id="dtTableRequest" class="table table-hover table-striped table-bordered table-sm">
                     <thead>
                         <tr>

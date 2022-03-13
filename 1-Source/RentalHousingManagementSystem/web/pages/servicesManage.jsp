@@ -40,7 +40,7 @@
                 $('.dataTables_length').addClass('bs-select');
             });
             const deleteFunction = (id) => {
-                if (confirm("Bấm ok để xóa phòng đã chọn, cancel để hủy") == true) {
+                if (confirm("Bấm ok để xóa dịch vụ đã chọn, cancel để hủy") == true) {
                     window.location.href = "DeleteServicesManage?id=" + id;
                 }
             }

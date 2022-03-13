@@ -21,7 +21,7 @@
         </label>
         <div id="sidebarMenu">
             <ul class="sidebarMenuInner">
-                <li><a href="HomeManage">Trang Chủ</a></li>
+                <li><a href="HomeManage">Quản Lý Yêu Cầu</a></li>
                 <li><a href="RoomManage">Quản Lý Phòng</a></li>
                 <li><a href="ServicesManage">Quản Lý Dịch Vụ</a></li>
                 <li><a href="ContractManage">Quản Lý Hợp Đồng</a></li>

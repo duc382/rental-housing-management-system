@@ -22,7 +22,7 @@
         </label>
         <div id="sidebarMenu">
             <ul class="sidebarMenuInner">
-                <li><a href="HomeGuest">Trang Chủ</a></li>
+                <li><a href="HomeGuest">Chi tiết hợp đồng</a></li>
                 <li><a href="EditAccountGuest">Quản Lý Tài Khoản</a></li>
                 <li><a href="RequestGuest">Quản Lý Yêu Cầu</a></li>
                 <li><a href="RoomEmpty">Phòng Trống</a></li>
