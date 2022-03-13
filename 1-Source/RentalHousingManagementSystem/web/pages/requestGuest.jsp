@@ -101,7 +101,7 @@
                         <c:forEach var="R" items="${listRequest}" varStatus="loop">
                             <tr>
                                 <td style="text-align: center">${R.content}</td>
-                                <td style="text-align: center">${R.status == 1?"Đã Thực Hiện":"Chưa thực hiện"}</td>
+                                <td style="text-align: center">${R.status == 1?"Đã xử lý":"Chưa xử lý"}</td>
                                 <td style="text-align: center">${R.note}</td>
                                 <td style="text-align: center">
                                     <button onclick="openFormEdit(${R.id}, '${R.content}',  ${loop.index}, listStatusRequest)">Sửa yêu cầu</button>

@@ -23,7 +23,7 @@ public class RequestDAO extends BaseDAO {
     public ArrayList<Request> getAllRequest() {
         ArrayList<Request> listRequest = new ArrayList<>();
         try {
-            String sql = "Select * from Customer";
+            String sql = "Select * from Request";
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -79,6 +79,19 @@ public class RequestDAO extends BaseDAO {
             st.setString(1, content);
             st.setDate(2, new java.sql.Date(updated.getTime()));
             st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void updateRequestOfManage(int id, int status, String note, Date updated) {
+        try {
+            String sql = "update Request set status=?, note=?, updatedAt=? where id=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setString(2, note);
+            st.setDate(3, new java.sql.Date(updated.getTime()));
+            st.setInt(4, id);
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -54,6 +54,23 @@ public class AccountDAO extends BaseDAO {
         }
         return null;
     }
+    // get account by id
+    public Account getAccountByID(int id) {
+        try {
+            String sql = "Select * from account where id=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Account a = new Account(rs.getInt("ID"), rs.getInt("RoomID"), rs.getString("username"),
+                        rs.getString("password"), rs.getInt("role"), rs.getDate("createdAt"), rs.getDate("updatedAt"));
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     // get account by RoomID
     public Account getAccountByRoomID(int roomID) {

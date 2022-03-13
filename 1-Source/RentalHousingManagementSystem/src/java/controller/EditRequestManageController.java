@@ -8,19 +8,19 @@ package controller;
 import DAL.RequestDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Request;
 
 /**
  *
  * @author coder
  */
-public class HomeManageController extends HttpServlet {
+public class EditRequestManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class HomeManageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeAdminController</title>");            
+            out.println("<title>Servlet EditRequestManageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeAdminController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditRequestManageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,11 +60,8 @@ public class HomeManageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        RequestDAO DBRe = new RequestDAO();
-        ArrayList<Request> listRequest = DBRe.getAllRequest();
-        request.setAttribute("listRequest", listRequest);
-        request.getRequestDispatcher("/pages/homeManage.jsp").forward(request, response);
+//        processRequest(request, response);
+        
     }
 
     /**
@@ -78,7 +75,16 @@ public class HomeManageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        int status = Integer.parseInt(request.getParameter("status"));
+        String note = request.getParameter("note").trim();
+        LocalDate updatedAt = LocalDate.now();
+        ZoneId defauZoneId = ZoneId.systemDefault();
+        Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
+        RequestDAO DBRe = new RequestDAO();
+        DBRe.updateRequestOfManage(id, status, note, updatedAtD);
+        response.sendRedirect("HomeManage");
     }
 
     /**

@@ -144,6 +144,10 @@
         <servlet-name>EditRequestGuest</servlet-name>
         <servlet-class>controller.EditRequestGuestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditRequestManage</servlet-name>
+        <servlet-class>controller.EditRequestManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -279,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>EditRequestGuest</servlet-name>
         <url-pattern>/EditRequestGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditRequestManage</servlet-name>
+        <url-pattern>/EditRequestManage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
