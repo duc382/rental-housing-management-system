@@ -46,7 +46,7 @@
         </script>
     </head>
     <body>
-        <%@include file="sidebarAndHeader.jsp"%>
+        <%@include file="sidebarAndHeaderGuest.jsp"%>
         <%
             ArrayList<Request> listRequest = (ArrayList<Request>) request.getAttribute("listRequest");
         %>

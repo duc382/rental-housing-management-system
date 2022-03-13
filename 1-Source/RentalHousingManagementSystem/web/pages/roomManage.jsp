@@ -104,6 +104,7 @@
                     <thead>
                         <tr>
                             <th class="th-sm">Tên Phòng</th>
+                            <th class="th-sm">Trạng Thái</th>
                             <th class="th-sm" style="text-align: center">Giá</th>
                             <th class="th-sm" style="text-align: center">Diện Tích</th>
                             <th class="th-sm" style="text-align: center">Số Lượng Tối Đa</th>
@@ -121,6 +122,7 @@
 
                     <tr>
                         <td class="roomName hired"><h5><%=listRoom.get(i).getName()%></h5></td>
+                        <td style="text-align: center"><h5><%=listRoom.get(i).getStatus()==1?"Đã Thuê":"Trống"%></h5></td>
                         <td style="text-align: center"><%=listRoom.get(i).getPrice()%></td>
                         <td style="text-align: center"><%=listRoom.get(i).getArea()%></td>
                         <td style="text-align: center"><%=listRoom.get(i).getQuantityMax()%></td>

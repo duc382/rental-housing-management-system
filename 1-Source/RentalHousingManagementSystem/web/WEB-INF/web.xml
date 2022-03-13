@@ -148,6 +148,10 @@
         <servlet-name>EditRequestManage</servlet-name>
         <servlet-class>controller.EditRequestManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RoomEmpty</servlet-name>
+        <servlet-class>controller.RoomEmptyController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>EditRequestManage</servlet-name>
         <url-pattern>/EditRequestManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomEmpty</servlet-name>
+        <url-pattern>/RoomEmpty</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

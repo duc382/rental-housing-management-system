@@ -25,6 +25,7 @@
                 <li><a href="HomeGuest">Trang Chủ</a></li>
                 <li><a href="EditAccountGuest">Quản Lý Tài Khoản</a></li>
                 <li><a href="RequestGuest">Quản Lý Yêu Cầu</a></li>
+                <li><a href="RoomEmpty">Phòng Trống</a></li>
                 <li><a href="Logout">Đăng Xuất</a></li>
             </ul>
         </div>
