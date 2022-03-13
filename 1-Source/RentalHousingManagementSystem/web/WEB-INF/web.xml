@@ -124,6 +124,10 @@
         <servlet-name>AddAccountManage</servlet-name>
         <servlet-class>controller.AddAccountManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditAccountGuest</servlet-name>
+        <servlet-class>controller.EditAccountGuestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>AddAccountManage</servlet-name>
         <url-pattern>/AddAccountManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAccountGuest</servlet-name>
+        <url-pattern>/EditAccountGuest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

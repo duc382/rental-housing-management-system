@@ -1,12 +1,12 @@
-<%@page import="model.Services"%>
-<%@page import="DAL.ServicesDAO"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
-    Document   : viewContractManage.jsp
-    Created on : Mar 12, 2022, 11:37:48 PM
+    Document   : viewContractGuest
+    Created on : Mar 13, 2022, 11:09:59 AM
     Author     : coder
 --%>
 
+<%@page import="model.Services"%>
+<%@page import="DAL.ServicesDAO"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
         <!--hết bs-->
-        <link rel="stylesheet" href="css/StyleViewContractManage.css">
+        <link rel="stylesheet" href="css/StyleViewContractGuest.css">
         <script>
             $(document).ready(function () {
                 $('#dtTableCustomer').DataTable();
@@ -39,7 +39,13 @@
             ServicesDAO DBSer = new ServicesDAO();
             Services services = new Services();
         %>
+        <%@include file="sidebarAndHeaderGuest.jsp"%>
         <h1 style="text-align: center">Chi Tiết Hợp Đồng Phòng ${contract.roomName}</h1>
+        <c:if test="${checkNull == true}">
+            <h1 style="text-align: center">Phòng chưa có hợp đồng</h1>
+        </c:if>
+        <c:if test="${checkNull != true}">
+        
         <div class="first">
             <div class="left">
                 <b>Tình trạng hợp đồng:</b> ${contract.status == 1? "Hoạt Động" : "Hủy"}
@@ -132,5 +138,6 @@
                 </table>
             </div>
         </div>
+        </c:if>
     </body>
 </html>

@@ -79,7 +79,7 @@
                 <input style="display: none" id="id" name="id">
                 <label><b>Tài Khoản</b></label>
                 <input type="text" id="username" name="username" required>
-                <label><b>Mật Khẩu</b></label>
+                <label><b>Mật Khẩu Mơi</b></label>
                 <input type="password" name="password" required>
                 <label><b>Nhập Lại Mật Khẩu</b></label>
                 <input type="password" name="repassword" required>

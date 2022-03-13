@@ -5,31 +5,24 @@
  */
 package controller;
 
-import DAL.ContractDAO;
-import DAL.CustomerDAO;
-import DAL.RoomDAO;
-import DAL.ServicesDAO;
-import DAL.TransactionDAO;
+import DAL.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
-import model.Contract;
-import model.Customer;
-import model.Room;
-import model.Services;
-import model.Transactions;
 
 /**
  *
  * @author coder
  */
-public class HomeGuestController extends HttpServlet {
+public class EditAccountGuestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +41,10 @@ public class HomeGuestController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeCustomerController</title>");            
+            out.println("<title>Servlet EditAccountGuestController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeCustomerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditAccountGuestController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,31 +63,10 @@ public class HomeGuestController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        HttpSession session=request.getSession();  
+        HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
-        ContractDAO DBCon = new ContractDAO();
-        Contract contract = DBCon.getContractByRooIDAndStatus(account.getRoomID(),1);
-        if (contract == null){
-            request.setAttribute("checkNull", true);
-            request.getRequestDispatcher("/pages/viewContractGuest.jsp").forward(request, response);
-            return;
-        }
-        request.setAttribute("contract", contract);
-        CustomerDAO DBCus = new CustomerDAO();
-        Customer customerRepresentative = DBCus.getCustomerByID(contract.getCustomerIDRepresentative());
-        request.setAttribute("customerRepresentative", customerRepresentative);
-        ArrayList<Customer> listCustomerNoneRepresentative = DBCus.getCustomerInContractNoneRepresentative(contract.getID(), contract.getCustomerIDRepresentative());
-        request.setAttribute("listCustomer", listCustomerNoneRepresentative);
-        TransactionDAO DBTrans = new TransactionDAO();
-        ArrayList<Transactions> listTrans = DBTrans.getAllTransactionInContract(contract.getID());
-        request.setAttribute("listTransactions", listTrans);
-        ServicesDAO DBSer = new ServicesDAO();
-        ArrayList<Services> listServices = DBSer.getServicesOfContract(contract.getID()+"");
-        request.setAttribute("listServices", listServices);
-        RoomDAO DBRoom = new RoomDAO();
-        Room room = DBRoom.getRoomByName(contract.getRoomName());
-        request.setAttribute("room", room);
-        request.getRequestDispatcher("/pages/viewContractGuest.jsp").forward(request, response);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("/pages/editAccountGuest.jsp").forward(request, response);
     }
 
     /**
@@ -108,7 +80,19 @@ public class HomeGuestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        LocalDate createdAt = LocalDate.now();
+        LocalDate updatedAt = LocalDate.now();
+        ZoneId defauZoneId = ZoneId.systemDefault();
+        Date createdAtD = Date.from(createdAt.atStartOfDay(defauZoneId).toInstant());
+        Date updatedAtD = Date.from(updatedAt.atStartOfDay(defauZoneId).toInstant());
+        Account account = new Account(id, 0, username, password, 1, createdAtD, updatedAtD);
+        AccountDAO DBA = new AccountDAO();
+        DBA.updateAccount(account);
+        response.sendRedirect("AccountManage");
     }
 
     /**

@@ -7,6 +7,8 @@ package controller;
 
 import DAL.ContractDAO;
 import DAL.CustomerDAO;
+import DAL.RoomDAO;
+import DAL.ServicesDAO;
 import DAL.TransactionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Contract;
 import model.Customer;
+import model.Room;
+import model.Services;
 import model.Transactions;
 
 /**
@@ -76,6 +80,12 @@ public class ViewContractManageController extends HttpServlet {
         TransactionDAO DBTrans = new TransactionDAO();
         ArrayList<Transactions> listTrans = DBTrans.getAllTransactionInContract(contract.getID());
         request.setAttribute("listTransactions", listTrans);
+        ServicesDAO DBSer = new ServicesDAO();
+        ArrayList<Services> listServices = DBSer.getServicesOfContract(contract.getID()+"");
+        request.setAttribute("listServices", listServices);
+        RoomDAO DBRoom = new RoomDAO();
+        Room room = DBRoom.getRoomByName(contract.getRoomName());
+        request.setAttribute("room", room);
         request.getRequestDispatcher("/pages/viewContractManage.jsp").forward(request, response);
     }
 
